@@ -1,0 +1,13 @@
+---
+layout: page
+title: "About"
+description: "嗨！我有一个了不起的发现：这个世界上，只有我最有资格成为我自己。"
+header-img: "img/about-bg.jpg"
+multilingual: true
+---
+
+<!-- Chinese Version -->
+<div class="zh post-container">
+    {% capture about_zh %}{% include about.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
+</div>
