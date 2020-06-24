@@ -59,9 +59,9 @@ tags:
 
 巴克豪森判据（Barkhausen Stability Criterion）提供了一种简单的办法来判断系统的稳定性，它的出发点是*假设有一个正弦激励信号在环路里走了一圈，如果回来的信号是同相的，且幅度没有变小，无论这个激励信号的频率如何，这个系统都是不稳定的*。这种想法很直观，并且很容易利用波特图（Bode Plot）进行判断，是在线电等课程中最常见到的稳定性判据。
 
-即对于前面提到的负反馈而言，$\angle H(s)=180^\circ$表示激励信号转一圈后是同相的，$|H(s)| \geq 1$表示回来的信号幅度相同或变大。
+即对于前面提到的负反馈而言，$\angle H(s)=180^\circ$表示激励信号转一圈后是同相的，$\vert H(s)\vert  \geq 1$表示回来的信号幅度相同或变大。
 
-波特图描述的是当$s=j\omega$时，$|H(s)|$和$\angle H(s)$随$\omega$的变化情况，其中$|H(s)|$以dB为单位。对于特定的$\omega$，对应的$|H(j\omega)|$和$\angle H(j\omega)$即表示角频率为$\omega$的激励信号经过该系统传递后获得的增益和相移。因此可以在幅频曲线（$|H(j\omega)|-\omega$）和相频曲线（$\angle H(j\omega)-\omega$）上标出0dB和180$^\circ$的位置，借此判断由其构成的闭环系统是否稳定，以及裕量如何。
+波特图描述的是当$s=j\omega$时，$\vert H(s)\vert $和$\angle H(s)$随$\omega$的变化情况，其中$\vert H(s)\vert $以dB为单位。对于特定的$\omega$，对应的$\vert H(j\omega)\vert $和$\angle H(j\omega)$即表示角频率为$\omega$的激励信号经过该系统传递后获得的增益和相移。因此可以在幅频曲线（$\vert H(j\omega)\vert -\omega$）和相频曲线（$\angle H(j\omega)-\omega$）上标出0dB和180$^\circ$的位置，借此判断由其构成的闭环系统是否稳定，以及裕量如何。
 
 如下图所示，这个闭环系统是稳定的，并且其相位裕度（Phase Margin）是47$^\circ$，增益裕度（Gain Margin）是11.6dB。
 
@@ -156,8 +156,8 @@ ans =
 $$\begin{equation}
 f(x)=\left\{
 \begin{aligned}
-sign(x)\cdot( \frac{1}{ln10}\cdot |x|^3-(1+\frac{1}{ln10})\cdot |x|^2+2\cdot |x|), |x|<1 \\
-sign(x)\cdot(log_{10}|x|), |x|\geq1
+sign(x)\cdot( \frac{1}{ln10}\cdot \vert x\vert ^3-(1+\frac{1}{ln10})\cdot \vert x\vert ^2+2\cdot \vert x\vert ), \vert x\vert <1 \\
+sign(x)\cdot(log_{10}\vert x\vert ), \vert x\vert \geq1
 \end{aligned}
 \right.
 \end{equation}$$
@@ -178,7 +178,7 @@ sign(x)\cdot(log_{10}|x|), |x|\geq1
 
 ## 尼科尔斯图
 
-前面提到的波特图和奈奎斯特图是以两种不同的方式展示$H(j\omega)$，分别是$|H(j \omega)|-\omega、\angle H(j \omega)-\omega$和$image(H(s))-real(H(s))$，而尼科尔斯图（Nichols Plot）是另外一种展示方式，它是$|H(j\omega)|-\angle H(j\omega)$曲线，如下图所示。
+前面提到的波特图和奈奎斯特图是以两种不同的方式展示$H(j\omega)$，分别是$\vert H(j \omega)\vert -\omega、\angle H(j \omega)-\omega$和$image(H(s))-real(H(s))$，而尼科尔斯图（Nichols Plot）是另外一种展示方式，它是$\vert H(j\omega)\vert -\angle H(j\omega)$曲线，如下图所示。
 
 ![Nichols_OPAMP_2](/img/in-post/{{page.id | replace:'/','-'}}/Nichols_OPAMP_2.png)
 
