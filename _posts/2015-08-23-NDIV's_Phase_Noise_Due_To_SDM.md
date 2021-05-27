@@ -17,8 +17,8 @@ SDM是PLL里很重要的一个噪声源，下面分析一下SDM对NDIV输出时�
 
 $$
 \begin{align*}
-PSD_{SDM} {{"&"}}= Qn*((1-z^{-1})^{sdm\_order})^2 
-{{"&"}}= \frac{1}{12fclk}*((1-z^{-1})^{sdm\_order})^2
+PSD_{SDM} = Qn*((1-z^{-1})^{sdm\_order})^2 
+= \frac{1}{12fclk}*((1-z^{-1})^{sdm\_order})^2
 \end{align*}
 $$
 
@@ -28,9 +28,9 @@ $$
 
 $$
 \begin{align*}
-t[i] \&= t_0+\sum_i (n[i] *Tvco) 
-\&= t_0+\sum_i((n_{avg}+n_{err}[i])*Tvco) 
-\&= t_0+i*Tref+Tvco*\sum_i n_{err}[i]
+t[i] = t_0+\sum_i (n[i] *Tvco) 
+= t_0+\sum_i((n_{avg}+n_{err}[i])*Tvco) 
+= t_0+i*Tref+Tvco*\sum_i n_{err}[i]
 \end{align*}
 $$
 
@@ -38,9 +38,9 @@ $$
 
 $$
 \begin{align*}
-ph_{err}[i] \&= 2\pi*\frac{t_{err}[i]}{Tref}
-\&= 2\pi*\frac{Tvco}{Tref}*\sum_i n_{err}[i]
-\&= \frac{2\pi}{n_{avg}}*\sum_i n_{err}[i]
+ph_{err}[i] = 2\pi*\frac{t_{err}[i]}{Tref}
+= 2\pi*\frac{Tvco}{Tref}*\sum_i n_{err}[i]
+= \frac{2\pi}{n_{avg}}*\sum_i n_{err}[i]
 \end{align*}
 $$
 
