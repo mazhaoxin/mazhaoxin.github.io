@@ -1,6 +1,6 @@
-# mazhaoxin.coding.me
+# mazhaoxin.github.io
 
-[mazhaoxin.coding.me](http://mazhaoxin.coding.me) since 2018-08-01
+[mazhaoxin.github.io](http://mazhaoxin.github.io) since 2018-08-01
 
 -----------------
 
