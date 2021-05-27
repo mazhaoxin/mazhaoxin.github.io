@@ -17,8 +17,8 @@ SDM是PLL里很重要的一个噪声源，下面分析一下SDM对NDIV输出时�
 
 $$
 \begin{align*}
-PSD_{SDM} &#38;= Qn*((1-z^{-1})^{sdm\_order})^2 
-&#38;= \frac{1}{12fclk}*((1-z^{-1})^{sdm\_order})^2
+PSD_{SDM} {{&}}= Qn*((1-z^{-1})^{sdm\_order})^2 
+{{&}}= \frac{1}{12fclk}*((1-z^{-1})^{sdm\_order})^2
 \end{align*}
 $$
 
