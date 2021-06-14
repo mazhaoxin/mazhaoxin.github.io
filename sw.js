@@ -15,8 +15,6 @@ const CACHE = CACHE_NAMESPACE + 'precache-then-runtime';
 const PRECACHE_LIST = [
   "./",
   "./offline.html",
-  "./js/jquery.min.js",
-  "./js/bootstrap.min.js",
   "./js/hux-blog.min.js",
   "./js/snackbar.js",
   "./img/avatar.jpg",
@@ -30,10 +28,14 @@ const PRECACHE_LIST = [
   "./img/bg-post/thinking.jpg",
   "./css/hux-blog.min.css",
   "./css/syntax.css",
-  "./css/bootstrap.min.css"
-  // "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css",
-  // "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/fonts/fontawesome-webfont.woff2?v=4.6.3",
-  // "//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"
+  "//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css",
+  "//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css",
+  "//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML",
+  "//cdn.staticfile.org/jquery/2.1.3/jquery.min.js",
+  "//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js",
+  "//cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML.js?V=2.7.7",
+  "//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js",
+  "//cdn.staticfile.org/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0"
 ]
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
