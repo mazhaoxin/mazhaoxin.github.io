@@ -150,7 +150,7 @@ def search():
 
 群晖NAS默认是不支持部署Flask的，因此还有一点点工作要做。
 
-以管理员身份登录NAS的Web管理界面后，在`套件中心`查找并安装Python3，在`控制面板 - 终端机和SNMP`中启动SSH功能。通过SSH连接到NAS后安装上传全部的文件，用`pip`命令安装所需要的包（见文尾总结），执行`run.py`后应该可以通过网址`http://NAS的IP:5200`看到页面（也可以用`.locals`域名访问，更简单方便）。`run.py`内容如下：
+以管理员身份登录NAS的Web管理界面后，在`套件中心`查找并安装Python3，在`控制面板 - 终端机和SNMP`中启动SSH功能。通过SSH连接到NAS后安装上传全部的文件，用`pip`命令安装所需要的包（见文尾总结），执行`run.py`后应该可以通过网址`http://NAS的IP:5000`看到页面（也可以用`.locals`域名访问，更简单方便）。`run.py`内容如下：
 
 ```python
 from LifeDiary import app
