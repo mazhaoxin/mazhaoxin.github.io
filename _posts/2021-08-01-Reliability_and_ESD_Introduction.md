@@ -13,7 +13,7 @@ tags:
 
 > MediaTek再一次在东南大学和西安电子科技大学举办了暑期夏令营，今年的模拟IC部分由我来讲（之前的讲师没时间），PPT因为信息安全问题拿不出来，我就把讲稿整理了一下形成本文。
 >
-> 这是第二部分的讲稿，第一部分是[消费电子中SerDes的发展趋势和关键技术](/2021-07-31-SerDes_Trends_and_Key_Technologes_In_Consumer_Electronics.md)。
+> 这是第二部分的讲稿，第一部分是[消费电子中SerDes的发展趋势和关键技术]({% post_url 2021-07-31-SerDes_Trends_and_Key_Technologes_In_Consumer_Electronics %})。
 
 ### 1. 标题
 

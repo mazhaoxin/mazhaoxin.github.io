@@ -12,7 +12,7 @@ tags:
 
 > MediaTek再一次在东南大学和西安电子科技大学举办了暑期夏令营，今年的模拟IC部分由我来讲（之前的讲师没时间），PPT因为信息安全问题拿不出来，我就把讲稿整理了一下形成本文。
 >
-> 这是第一部分的讲稿，第二部分是[可靠性与ESD介绍](/2021-08-01-Reliability_and_ESD_Introduction.md)。
+> 这是第一部分的讲稿，第二部分是[可靠性与ESD介绍]({% post_url 2021-08-01-Reliability_and_ESD_Introduction %})。
 
 ### 1. 标题
 
