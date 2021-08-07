@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "遗传算法"
-date:       2020-08-07 13:46:52
+date:       2021-08-07 13:46:52
 author:     "MaZhaoxin"
 header-img: "img/bg-post/coding.jpg"
 catalog:    true
