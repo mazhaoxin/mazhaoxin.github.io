@@ -130,15 +130,24 @@ tags:
 脚本附在本文最后，其中的参数如下：
 
 ```python
-start_work_year = 2013  # 开始工作的年份，只用来显示，无关紧要
-start_work_age = 25     # 开始工作的年龄
-stop_work_age = 55      # 干不下去的年龄
-gender = 'f'            # 性别，只能是'm'或'f'，会影响领养老金的年龄
-z = 3                   # 缴费工资指数，在0.6~3之间
-z2 = 0                  # 灵活就业期间的缴费指数，在0或0.6~3之间，0为不再缴费
-k_avg_salary = 0.05     # 社会平均工资的增长速度
-k_personal_rate = 0.02  # 个人账户记账利率
-k_yuebao_rate = 0.02    # 理财利率
+# 开始工作的年份，只用来显示，无关紧要
+start_work_year = 2013
+# 开始工作的年龄
+start_work_age = 25
+# 干不下去的年龄
+stop_work_age = 55
+# 性别，只能是'm'或'f'，会影响领养老金的年龄
+gender = 'f'
+# 缴费工资指数，在0.6~3之间
+z = 3
+# 灵活就业期间的缴费指数，在0或0.6~3之间，0为不再缴费
+z2 = 0
+# 社会平均工资的增长速度
+k_avg_salary = 0.05
+# 个人账户记账利率
+k_personal_rate = 0.02
+# 理财利率
+k_yuebao_rate = 0.02
 ```
 
 运行后可以得到如下的报表（以第一年工作时的上年社平工资为基准进行计算），上半部分详细地列出了每年的缴费情况、个人账户余额增长情况等，下半部分给出了简单的综述，同时给出了*养老金相对社平工资的倍数*。
@@ -189,5 +198,5 @@ k_yuebao_rate = 0.02    # 理财利率
 
 > 最后附上脚本，供参考：
 >
-> - 测算： [persion_calculation.py](/img/in-post/{{page.id | replace:'/','-'}}/persion_calculation.py) 
-> - 自费评估： [persion_calculation_self.py](/img/in-post/{{page.id | replace:'/','-'}}/persion_calculation_self.py) 
+> - 测算： [persion_calculation.py](/img/in-post/{{page.id | replace:'/','-'}}/persion_calculation.py)
+> - 自费评估： [persion_calculation_self.py](/img/in-post/{{page.id | replace:'/','-'}}/persion_calculation_self.py)
