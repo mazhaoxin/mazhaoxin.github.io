@@ -139,6 +139,7 @@ Allan方差在通信电路中不太常见（迄今为止只在32k RTC clock相�
 我们通常说的抖动是一个数值，它能表示的信息量必然远小于相位噪声曲线，而此处说的抖动指的是统计的样本。
 
 在介绍IEEE对相位噪声的定义时有提到，相位噪声是相位偏移量的谱密度，而对于Logic形式的时钟，只有沿处的相位是有意义的，如果我们有沿的偏移量数据，便可以得到相应的谱密度，即相位噪声。
+
 $$
 \mathcal{L}_{SSB}(f)=\frac{1}{2}{\rm{PSD}_{SSB}}(2\pi\Delta t[i]/T_{avg})
 $$
@@ -154,9 +155,11 @@ $$
 ### Absolute Jitter
 
 假设相位噪声引起的抖动呈高斯分布，根据随机过程的相关知识（*啊……随机过程的知识已经忘干净了……*），对相位噪声曲线积分后换算到秒为单位便是Jabs的rms值，与前面E5052B manual的表格内的公式相同。
+
 $$
 {\rm Jabs_{rms}}=\frac{T_{avg}}{2\pi} \sqrt{2\int_{f0}^{f1}10^{\mathcal{L(f)}/10}{\rm d}f}=\frac{1}{2\pi f_c} \sqrt{2\int_{f0}^{f1}10^{\mathcal{L(f)}/10}{\rm d}f}
 $$
+
 显然积分范围对得到的数值有重要影响：
 
 - 对于数字无线通信系统，一般f0取Packet length的倒数，f1取Symbol rate的一半；
@@ -172,10 +175,13 @@ $$
 假设Jabs的样本是$\Delta t[i]$，Jp的样本则是$\Delta t[i]-\Delta t[i-1]$，即引入了传递函数为$H(z)=1-z^{-1}$的差分模块。
 
 由$z=e^{sT_s}, s=j\omega$可得
+
 $$
 H(\omega)=1-e^{-j\omega T_s}
 $$
+
 再带入欧拉公式$e^{jx}=\cos x+j\sin x$可得
+
 $$
 \begin{array}{l}
 |H(\omega)|^2 &= |1-[\cos(-\omega T_s)+j\sin(-\omega T_s)]|^2 \\
@@ -184,25 +190,31 @@ $$
 &= 4\cdot\sin^2(\omega T_s/2) \\
 \end{array}
 $$
+
 这里的$T_s$即为$T_{avg}$，代入相位噪声到抖动的计算公式整理可得
+
 $$
 {\rm Jp_{rms}}=\frac{1}{2\pi f_c} \sqrt{2\int_{f0}^{f1}4\cdot\sin^2 (\pi f/f_c)\cdot10^{\mathcal{L(f)}/10}{\rm d}f}
 $$
+
 不难看出这个传递函数在$f=f_c/2$处的增益最高（6dB），而对低频的抑制非常大，也就是说低频噪声几乎不影响Jp，主要起作用的是底噪（Noise floor）。而由于前面提到过的E5052B测不到很高的频偏，且从电路的角度讲Clock buffer chain主要影响的是底噪，所以在实际项目中很难测到真实的Jp情况。
 
 ### Cycle-to-cycle Jitter
 
 与Jp类似，再叠加一次差分传递函数，因此
+
 $$
 {\rm Jc2c_{rms}}=\frac{1}{2\pi f_c} \sqrt{2\int_{f0}^{f1}16\cdot\sin^4 (\pi f/f_c)\cdot10^{\mathcal{L(f)}/10}{\rm d}f}
 $$
+
 也就是说Jc2c更加看重底噪的情况。
 
 ### N-Period Jitter
 
 与Jp类似，只不过传递函数变成了$H(z)=1-z^{-n}$，即$|H(\omega)|^2=4\cdot\sin^2(\omega \cdot n T_s/2)$，因此可得
+
 $$
-x{\rm Jc2c_{rms}}(n)=\frac{1}{2\pi f_c} \sqrt{2\int_{f0}^{f1}4\cdot\sin^2 (n\pi f/f_c)\cdot10^{\mathcal{L(f)}/10}{\rm d}f}
+{\rm Jc2c_{rms}}(n)=\frac{1}{2\pi f_c} \sqrt{2\int_{f0}^{f1}4\cdot\sin^2 (n\pi f/f_c)\cdot10^{\mathcal{L(f)}/10}{\rm d}f}
 $$
 
 > 就这些吧，这篇跟之前的那篇的区别不大，主要是把推导过程也写上了。
