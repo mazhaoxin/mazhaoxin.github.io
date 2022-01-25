@@ -184,7 +184,7 @@ $$
 
 $$
 \begin{array}{l}
-|H(\omega)|^2 &= |1-[\cos(-\omega T_s)+j\sin(-\omega T_s)]|^2 \\
+\vert H(\omega) \vert ^2 &= \vert 1-[\cos(-\omega T_s)+j\sin(-\omega T_s)] \vert ^2 \\
 &= [1-\cos(\omega T_s)]^2+\sin^2(\omega T_s) \\
 &= 2\cdot[1-\cos(\omega T_s)] \\
 &= 4\cdot\sin^2(\omega T_s/2) \\
@@ -211,7 +211,7 @@ $$
 
 ### N-Period Jitter
 
-与Jp类似，只不过传递函数变成了$H(z)=1-z^{-n}$，即$|H(\omega)|^2=4\cdot\sin^2(\omega \cdot n T_s/2)$，因此可得
+与Jp类似，只不过传递函数变成了$H(z)=1-z^{-n}$，即$\vert H(\omega) \vert ^2=4\cdot\sin^2(\omega \cdot n T_s/2)$，因此可得
 
 $$
 {\rm Jc2c_{rms}}(n)=\frac{1}{2\pi f_c} \sqrt{2\int_{f0}^{f1}4\cdot\sin^2 (n\pi f/f_c)\cdot10^{\mathcal{L(f)}/10}{\rm d}f}
