@@ -83,7 +83,7 @@ tags:
 - `\le`：$\le$，`\ge`：$\ge$，`\ll`：$\ll$，`\gg`：$\gg$（`l`表示less，`g`表示greater，`e`表示equal）
 - `\to`：$\to$，`\downarrow`：$\downarrow$，`\uparrow`：$\uparrow$
 
-更多的可参考latex的文档，也可以使用在线编辑器查找，这里推荐“妈咪说”的[https://www.latexlive.com/]()。
+更多的可参考latex的文档，也可以使用在线编辑器查找，这里推荐“妈咪说”的[https://www.latexlive.com/](https://www.latexlive.com/)。
 
 ### 常用函数
 
@@ -104,7 +104,7 @@ tags:
 
 ### 方程式组、多行等式
 
-当使用方程式组或者多行等式时，处于美观的考虑，我们希望等号是上下对齐的，这个时候需要用到`eqnarray`环境，具体的用法如示例：
+当使用方程式组或者多行等式时，出于美观的考虑，我们希望等号是上下对齐的，这个时候需要用到`eqnarray`环境，具体的用法如示例：
 
 ```latex
 \begin{eqnarray}
