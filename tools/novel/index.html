@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Novel Helper</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <script src="js.js"></script>
+        <style>
+            #config_form {
+                display: none;
+            }
+            #config_form input{
+                display: block;
+            }
+        </style>
+    </head>
+    <body onload="main()">
+        <div><a href="index.html">Reset</a></div>
+        <div id="config">
+            <form id="config_form">
+                <input type="text" id="URL" name="URL" placeholder="Paste URL here" />
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div id="main">
+        </div>
+    </body>
+</html>
