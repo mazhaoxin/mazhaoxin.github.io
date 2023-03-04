@@ -1,6 +1,10 @@
 https://mazhaoxin.github.io/
 https://mazhaoxin.github.io/about/
 https://mazhaoxin.github.io/tags/
+https://mazhaoxin.github.io/2023/03/04/8b10b_Encoding/
+https://mazhaoxin.github.io/2023/03/03/XTAL_Oscillator/
+https://mazhaoxin.github.io/2022/07/24/PLL_script_framework/
+https://mazhaoxin.github.io/2022/05/09/latex_in_markdown/
 https://mazhaoxin.github.io/2022/01/23/Phase_Noise_Jitter_EVM_and_Eye_Diagram/
 https://mazhaoxin.github.io/2021/08/07/Genetic_Algorithm/
 https://mazhaoxin.github.io/2021/08/01/Reliability_and_ESD_Introduction/
