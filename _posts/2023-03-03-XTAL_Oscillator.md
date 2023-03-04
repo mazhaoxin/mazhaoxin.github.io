@@ -2,7 +2,7 @@
 layout: post
 title: "晶体振荡器"
 date: 2023-03-03 21:13
-author: "MaZhaoxin & ChatGPT"
+author: "ChatGPT & MaZhaoxin"
 header-img: "img/bg-post/ic.jpg"
 catlog: true
 tags:
