@@ -8,6 +8,7 @@ catalog:    true
 tags:
     - Filter
 
+typora-root-url:	..
 ---
 
 模拟电路工程师不会对基于RLC的滤波器感到陌生，但对于数字滤波器或*离散时间域滤波器*就没那么熟悉了。今天我想总结一下简单的数字滤波器的分析方法、常用模拟滤波器对应的数字滤波器实现以及模拟滤波器的离散时间域建模方法。
@@ -24,7 +25,7 @@ tags:
 
 根据滤波器的输出是否会参与下一次运算，数字滤波器可以分为有限冲击响应（FIR）和无限冲击响应（IIR）两种。通俗地讲，就是看输出是由有限的输入决定，还是由在此之前所有的输入决定。如下图所示，对于FIR滤波器而言，当$n = j+1$时$Y[n]$便与$X[0]$没有关系了；而同样的情况下对于IIR滤波器而言，$X[0]$还可以通过$Y[n-1]$对$Y[n]$施加影响。
 
-![Diagram_FIR_IIR_Filter](/img/in-post/{{page.id | replace:'/','-'}}/Diagram_FIR_IIR_Filter.png)
+![Diagram_FIR_IIR_Filter](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Diagram_FIR_IIR_Filter.png)
 
 因为FIR滤波器不会无限地积累，因此它是*绝对稳定*的。但因为同样的原因，FIR滤波器不能实现DC处的极点。
 
@@ -51,34 +52,34 @@ tags:
 
 这个应该很容易想到，只要把输出延1拍后再送到输入相加即可，其框图可以表示如下：
 
-![Diagram_Intergrator](/img/in-post/{{page.id | replace:'/','-'}}/Diagram_Intergrator.png)
+![Diagram_Intergrator](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Diagram_Intergrator.png)
 
 易得它的传递函数是$H(z) = 1/(1-z^{-1})$，将$z = e^{s\cdot T_s}$代入后可得$H(s)=1/(1-e^{-sT_s})$，当$sT_s<<1$时做泰勒展开式替换便可得到$H(s)=1/(sT_s)=f_s/s$，即在低频处其传函与模拟积分器一致。下图所示的是数字滤波器和模拟滤波器实现的积分器的幅频和相频曲线对比（取$f_s=25MHz$，下同）。不难看出，当频率小于$f_s$一个数量级时幅频曲线吻合的很好，但相频曲线逐渐地出现了偏差。
 
-![Bode_Intergrator](/img/in-post/{{page.id | replace:'/','-'}}/Bode_Intergrator.png)
+![Bode_Intergrator](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Bode_Intergrator.png)
 
 ## 微分器/差分器
 
 微分器也不难想到，用当前的输入减去上一次的输入即可，它的框图如下图所示：
 
-![Diagram_Differential](/img/in-post/{{page.id | replace:'/','-'}}/Diagram_Differential.png)
+![Diagram_Differential](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Diagram_Differential.png)
 
 同样可得其传递函数为$H(z)=1-z^{-1}$，以及相应的频响曲线如下图所示：
 
-![Bode_Differential](/img/in-post/{{page.id | replace:'/','-'}}/Bode_Differential.png)
+![Bode_Differential](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Bode_Differential.png)
 
 ## 一阶RC低通滤波器
 
 考虑如下图所示的一阶RC低通滤波器，电容上保持的电压（也就是当前$Y$的值）为$Y[n-1]$，经过一段很小的时间$\Delta t$后，有一定的电流经过电阻流向了电容，电流的大小为$I[N]=(X[N]-Y[n-1])/R$，那么电容上电压的变化值是$\Delta Y = I[N]\cdot \Delta t/C$，即当前的输出电压为
 $$Y[n]=Y[n-1]+\Delta Y = Y[n-1]+(X[N]-Y[n-1])\cdot \Delta t/(RC)$$
 
-![Diagram_RC](/img/in-post/{{page.id | replace:'/','-'}}/Diagram_RC.png)
+![Diagram_RC](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Diagram_RC.png)
 
 若把$\Delta t$当作$T_s$，便可得到对应数字滤波器的传函$H(z)=k/(1-(1-k)z^{-1})$，其中$k=T_s/(RC)$。其框图和频响曲线如下图所示：
 
-![Diagram_RC_Z](/img/in-post/{{page.id | replace:'/','-'}}/Diagram_RC_Z.png)
+![Diagram_RC_Z](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Diagram_RC_Z.png)
 
-![Bode_RC](/img/in-post/{{page.id | replace:'/','-'}}/Bode_RC.png)
+![Bode_RC](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Bode_RC.png)
 
 
 
@@ -90,13 +91,13 @@ $$H(z)=1-k/(1-(1-k)z^{-1})=(1-k)(1-z^{-1})/(1-(1-k)z^{-1})$$
 
 对应的频响曲线如下图所示：
 
-![Bode_CR](/img/in-post/{{page.id | replace:'/','-'}}/Bode_CR.png)
+![Bode_CR](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Bode_CR.png)
 
 ## PID算法与级联
 
 在自动控制领域，常用PID控制算法来处理反馈误差信号。其中P表示比例（proportional）、I表示积分（integral）、D表示微分（differential）。
 
-![Diagram_PID](/img/in-post/{{page.id | replace:'/','-'}}/Diagram_PID.png)
+![Diagram_PID](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Diagram_PID.png)
 
 从幅频曲线的角度很容易理解，比例单元的幅频曲线是条水平直线，积分器和微分器的幅频曲线分别是斜向下方和斜向上方的直线，不同曲线叠加在一起时靠上部的会占主导。然后通过级联可以构成我们想要的频响，就像折纸一样。
 
@@ -112,15 +113,15 @@ $$H(z)=1-k/(1-(1-k)z^{-1})=(1-k)(1-z^{-1})/(1-(1-k)z^{-1})$$
 
 滞后超前滤波器是在type-II PLL中常用的环路滤波器，它的幅频曲线如下图所示：
 
-![Bode_PLL_LPF](/img/in-post/{{page.id | replace:'/','-'}}/Bode_PLL_LPF.png)
+![Bode_PLL_LPF](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Bode_PLL_LPF.png)
 
 显然可以由一个积分单元加一个比例单元，再级联一个一阶低通组成。而一阶低通可以由积分单元加负反馈构成，整体的框图如下图所示（其中$k1=2\pi f_z/f_s, k2=2\pi f_p/f_s$）：
 
-![Diagram_PLL_LPF](/img/in-post/{{page.id | replace:'/','-'}}/Diagram_PLL_LPF.png)
+![Diagram_PLL_LPF](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Diagram_PLL_LPF.png)
 
 其对应的频响曲线如下图所示（其中$f_z=30kHz, f_p=1MHz, f_s=25MHz$）。可以看到相位在我们关心的地方是有几度的误差的，解决这个问题的唯一方案是提高$f_s$：
 
-![Bode_PLL_LPF_2](/img/in-post/{{page.id | replace:'/','-'}}/Bode_PLL_LPF_2.png)
+![Bode_PLL_LPF_2](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Bode_PLL_LPF_2.png)
 
 ## $f_s/2$频点陷波滤波器
 
@@ -132,7 +133,7 @@ $f_s/2$频点陷波滤波器，顾名思义即是只滤除在$f_s/2$处的单音
 
 它的频响曲线如下图所示：
 
-![Bode_notch_1](/img/in-post/{{page.id | replace:'/','-'}}/Bode_notch_1.png)
+![Bode_notch_1](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Bode_notch_1.png)
 
 # 模拟滤波器的离散时间域建模
 
@@ -150,11 +151,11 @@ $f_s/2$频点陷波滤波器，顾名思义即是只滤除在$f_s/2$处的单音
 
 > 以PLL中的LPF为例，先把DC处的极点拿掉，仿真得到阶跃响应曲线，然后采样、求微分得到FIR滤波器的参数，如下图所示：
 >
-> ![StepResp_PLL_LPF](/img/in-post/{{page.id | replace:'/','-'}}/StepResp_PLL_LPF.png)
+> ![StepResp_PLL_LPF](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/StepResp_PLL_LPF.png)
 >
 > 根据前面得到的参数配置FIR滤波器（FIR的工作频率为25MHz，阶数为30），并级联上积分器补回DC处的极点，得到最终的离散时间域滤波器模型。建模前后的频响曲线如下图所示：
 >
-> ![Bode_PLL_LPF_3](/img/in-post/{{page.id | replace:'/','-'}}/Bode_PLL_LPF_3.png)
+> ![Bode_PLL_LPF_3](/img/in-post/2019-10-05-Brief_of_Digital_Filter.assets/Bode_PLL_LPF_3.png)
 >
 > 如果将工作频率提升一倍，可以得到更好的效果，但此时FIR的阶数也要翻一番。
 

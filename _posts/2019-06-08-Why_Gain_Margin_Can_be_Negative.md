@@ -8,17 +8,18 @@ catalog:    true
 tags:
     - Math
 
+typora-root-url:	..
 ---
 
 # 引子
 
 可能很多人都有过一个疑问，对于type-II PLL的传递函数（其波特图如下所示）而言，在DC处相移是180度，且开环增益远大于0dB，为什么还可以保持稳定呢？
 
-![Bode_PLL_OL](/img/in-post/{{page.id | replace:'/','-'}}/Bode_PLL_OL.png)
+![Bode_PLL_OL](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Bode_PLL_OL.png)
 
 如果说上例中DC处的180度相移是无限接近的话，在有温度补偿环路的PLL中（其频响曲线如下图所示），相频曲线明明白白地在增益大于0dB的位置穿过了180度，为什么还是能稳定呢？
 
-![Bode_PLL_OL_wTempCal](/img/in-post/{{page.id | replace:'/','-'}}/Bode_PLL_OL_wTempCal.png)
+![Bode_PLL_OL_wTempCal](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Bode_PLL_OL_wTempCal.png)
 
 或者换句话说，**如果一个系统的相位裕度为正，但增益裕度为负，那么这个系统是稳定的吗？如果可以，增益裕度的意义是什么？**
 
@@ -44,7 +45,7 @@ tags:
 
 考虑最简单的情况，有负反馈系统如下图所示（其中$H(s)=num(s)/den(s)$）：
 
-![Diagram_Sample_Negative_Feedback](/img/in-post/{{page.id | replace:'/','-'}}/Diagram_Sample_Negative_Feedback.png)
+![Diagram_Sample_Negative_Feedback](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Diagram_Sample_Negative_Feedback.png)
 
 易得其闭环传递函数为$G(s)=H(s)/(1+H(s))=num(s)/(num(s)+den(s))$，显然有
 
@@ -65,13 +66,13 @@ tags:
 
 如下图所示，这个闭环系统是稳定的，并且其相位裕度（Phase Margin）是47$^\circ$，增益裕度（Gain Margin）是11.6dB。
 
-![Bode_OPAMP](/img/in-post/{{page.id | replace:'/','-'}}/Bode_OPAMP.png)
+![Bode_OPAMP](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Bode_OPAMP.png)
 
 由于过冲（Overshooting）的大小与相位裕度有关（参考：[Overshoot as a Function of Phase Margin](http://www2.units.it/carrato/didatt/E_web/doc/application_notes/overshoot_and_phase_margin.pdf)），因此在实际应用中我们更多的用波特图观察相位裕度及其走向，而不太关注增益裕度。
 
 如果出现了负的增益裕度，系统一定会像前面所述的那样出现不稳定的现象吗？给上面那个波特图在200kHz处加3个极点、在1MHz处加3个零点，会得到下面的图像（调整了增益项使单位增益频率不变）：
 
-![Bode_OPAMP_2](/img/in-post/{{page.id | replace:'/','-'}}/Bode_OPAMP_2.png)
+![Bode_OPAMP_2](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Bode_OPAMP_2.png)
 
 在上图中有3个增益裕度，其中两负一正（-63.3dB、-25.2dB和+10.2dB）。而基于这个开环传函构建的闭环系统是稳定的，因为它的极点均在左半平面：
 
@@ -93,7 +94,7 @@ ans =
 
 检视闭环系统的阶跃响应也可以证明这点：
 
-![Step_OPAMP_2](/img/in-post/{{page.id | replace:'/','-'}}/Step_OPAMP_2.png)
+![Step_OPAMP_2](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Step_OPAMP_2.png)
 
 这个例子说明巴克豪森判据对于这种问题是不完备的，它只能用于相频曲线只穿过一次180$^\circ$线的情况。更多的可以参考[Barkhausen Stability Criterion](http://web.mit.edu/klund/www/weblatex/node4.html)。
 
@@ -103,7 +104,7 @@ ans =
 
 根轨迹的绘制非常复杂和繁琐，具体的可以参考[要想正确画出根轨迹，先搞清楚这8大法则再说！](https://zhuanlan.zhihu.com/p/28993380)。不过借助MATLAB可以很轻松的获得上面那个传函的根轨迹图，如下所示（右侧的为局部放大图）：
 
-![RLocus_OPAMP_2](/img/in-post/{{page.id | replace:'/','-'}}/RLocus_OPAMP_2.png)
+![RLocus_OPAMP_2](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/RLocus_OPAMP_2.png)
 
 从根轨迹图上可以看到闭环传函的极点有两部分到了右半平面，分别是
 
@@ -131,7 +132,7 @@ ans =
 
 基于副角定理可以推断，如果在$s$平面沿着虚轴从$-\infty$到$+\infty$、再沿着一个半径为无穷大的半圆回到$-\infty$，将覆盖$H(s)$所有在右半平面的零极点，那么数一数$H(s)$平面中原点被绕了几圈就可以推断右半平面零极点的个数。同样的道理，数一数点(-1, 0)被绕了几圈就可以推断$1+H(s)$右半平面零极点的个数，如下图所示（参考自[奈奎斯特稳定判据](https://wenku.baidu.com/view/c4a2fa60cf84b9d528ea7ae0.html)）：
 
-![Nyquist_principle](/img/in-post/{{page.id | replace:'/','-'}}/Nyquist_principle.png)
+![Nyquist_principle](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_principle.png)
 
 > 注意这里有个前提条件是原点和虚轴上没有零极点。
 
@@ -139,7 +140,7 @@ ans =
 
 对于开环传函有原点处极点的情况（例如PLL的传函），则需要补全曲线，其规则是用一个半径为无穷大的圆弧从正半实轴连接到$\omega=0^+$的点，圆弧的角度为$-n\cdot\pi/2$，其中$n$为开环传函中位于原点的极点个数。下图所示的为$n$分别取1、2、3的情况（从波特图上理解，可以认为在最最左侧相位从0**连续**变到$-n\cdot\pi/2$，即在相频曲线上画了一条竖线）：
 
-![Nyquist_principle_2](/img/in-post/{{page.id | replace:'/','-'}}/Nyquist_principle_2.png)
+![Nyquist_principle_2](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_principle_2.png)
 
 因为$H(a-jb)$与$H(a+jb)$的实部相同、虚部互为相反数（即关于实轴对称），实际应用中只需要知道$\omega=0^+\rightarrow+\infty$的情况即可。具体的可以参考：
 
@@ -149,7 +150,7 @@ ans =
 
 **例1**：把前面那个系统的$H(s)$在$s=j\omega, \omega=0\rightarrow+\infty$的值在复平面上画出，并对其做关于实轴的镜像，即得到了奈奎斯特图。在查看奈奎斯特图时需要不同级别的缩放，以观察曲线和点(-1, 0)的关系，如下图所示：
 
-![Nyquist_OPAMP_2](/img/in-post/{{page.id | replace:'/','-'}}/Nyquist_OPAMP_2.png)
+![Nyquist_OPAMP_2](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_OPAMP_2.png)
 
 由于原始奈奎斯特图不方便查看，此处引入一个缩放函数
 
@@ -164,15 +165,15 @@ sign(x)\cdot(log_{10}\vert x\vert ), \vert x\vert \geq1
 
 该缩放函数可以在尽量避免影响$-1<x<1$的前提下大大减小不同数量级之间的差别。在释加缩放函数后奈奎斯特曲线如下图所示（需要注意两条线实际上是连接在一起的，下同）。从这张图中便很容易观察出(-1, 0)没有被闭合曲线围绕（可以把曲线想象成柔软的绳子，而(-1, 0)是一根柱子，拉住最右侧部分的绳子向右拉动，可以发现绳子不会被柱子挡住），因此系统是稳定的。至于裕量，需要通过曲线与单位圆的交点进行判断，此处不再赘述。
 
-![Nyquist_OPAMP_2_log](/img/in-post/{{page.id | replace:'/','-'}}/Nyquist_OPAMP_2_log.png)
+![Nyquist_OPAMP_2_log](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_OPAMP_2_log.png)
 
 若将增益增大5倍，这条曲线会变成如下的样子，不难看出点(-1, 0)被沿逆时针方向围绕了两圈，即闭环传函在右半平面存在两个极点，系统不稳定。
 
-![Nyquist_OPAMP_2_log2](/img/in-post/{{page.id | replace:'/','-'}}/Nyquist_OPAMP_2_log2.png)
+![Nyquist_OPAMP_2_log2](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_OPAMP_2_log2.png)
 
 **例2**：考虑最前面带温度补偿的PLL，按照前面的规则绘制奈奎斯特图如下，同样可以看出点(-1, 0)没有被闭合曲线围绕，因此闭环系统是稳定的。
 
-![Nyquist_PLL_wTempCal_log](/img/in-post/{{page.id | replace:'/','-'}}/Nyquist_PLL_wTempCal_log.png)
+![Nyquist_PLL_wTempCal_log](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_PLL_wTempCal_log.png)
 
 
 
@@ -180,7 +181,7 @@ sign(x)\cdot(log_{10}\vert x\vert ), \vert x\vert \geq1
 
 前面提到的波特图和奈奎斯特图是以两种不同的方式展示$H(j\omega)$，分别是$\vert H(j \omega)\vert -\omega、\angle H(j \omega)-\omega$和$image(H(s))-real(H(s))$，而尼科尔斯图（Nichols Plot）是另外一种展示方式，它是$\vert H(j\omega)\vert -\angle H(j\omega)$曲线，如下图所示。
 
-![Nichols_OPAMP_2](/img/in-post/{{page.id | replace:'/','-'}}/Nichols_OPAMP_2.png)
+![Nichols_OPAMP_2](/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nichols_OPAMP_2.png)
 
 波特图上的两条虚线就变成了尼科尔斯图上的一个点，一般情况下若点(-180$^\circ$, 0dB)在曲线的右侧（沿着$\omega$从小到大的方向看），则表示闭环系统稳定。而与波特图类似的，若相位多次穿过180$^\circ$，这种判据也会存在问题。
 

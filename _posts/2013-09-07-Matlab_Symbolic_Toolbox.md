@@ -7,6 +7,7 @@ header-img: "img/bg-post/matlab.jpg"
 catalog:    true
 tags:
     - MATLAB
+typora-root-url:	..
 ---
 
 ##### 一、声明

@@ -7,6 +7,7 @@ header-img: "img/bg-post/comm.jpg"
 catalog:    true
 tags:
     - 通信
+typora-root-url:	..
 ---
 
 所谓“通信”就是把*信息*从一方传递到另一方，那在聊通信之前要先聊一聊什么叫做“信息”。

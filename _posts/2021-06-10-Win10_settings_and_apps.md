@@ -7,6 +7,7 @@ header-img: "img/bg-post/manager.jpg"
 catalog:    true
 tags:
     - Software
+typora-root-url:	..
 ---
 
 # 前言

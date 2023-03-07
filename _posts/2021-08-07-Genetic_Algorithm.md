@@ -7,6 +7,7 @@ header-img: "img/bg-post/coding.jpg"
 catalog:    true
 tags:
     - Others
+typora-root-url:	..
 ---
 
 # 基本原理
@@ -15,7 +16,7 @@ tags:
 
 具体的，它把问题的解分成若干个**基因**，这些基因合为一个**个体**（也就是每个个体是一个潜在的解，每个基因是一个独立变量）。若干个体组成**种群**，通过一定的方式给种群中的每个个体**打分**（计算*适应度*），其中得分较高的部分个体（*选择*）可以**繁殖**产生后代。繁殖的过程包括**杂交**和**变异**，杂交表示新产生的个体的基因继承自两个长辈个体，变异表示基因会在原来的基础上产生一定的、随机的变化。选择和繁殖的过程会不断地改变群体里个体的基因，使其代表的解逐渐地向最优解靠近。
 
-![basic](/img/in-post/{{page.id | replace:'/','-'}}/basic.svg)
+![basic](/img/in-post/2021-08-07-Genetic_Algorithm.assets/basic.svg)
 
 # 举个例子
 
@@ -23,7 +24,7 @@ tags:
 
 >  该图案是中央气象台nmc.cn的logo。
 
-![ref](/img/in-post/{{page.id | replace:'/','-'}}/ref.png)
+![ref](/img/in-post/2021-08-07-Genetic_Algorithm.assets/ref.png)
 
 首先定义几个常数
 
@@ -102,11 +103,11 @@ for i_loop in range(N_LOOP):
 
 展示一下最终的结果：下图中左上角的为参考图案，其他的从左到右、从上到下是从初始一代到最后一代（相邻的两张图间隔了100代）各代中最佳的个体（即分最高的个体）。可以看到从完全没有图案到出现图案，再到图案逐渐清晰的过程。
 
-![plot_1000](/img/in-post/{{page.id | replace:'/','-'}}/plot_1000.png)
+![plot_1000](/img/in-post/2021-08-07-Genetic_Algorithm.assets/plot_1000.png)
 
 对应的各代最佳个体的分数变化如下图所示，可见600代后适应度分数的变化趋于平缓了，也对应了上图中图案清晰度的变化没那么大。
 
-![score_1000](/img/in-post/{{page.id | replace:'/','-'}}/score_1000.png)
+![score_1000](/img/in-post/2021-08-07-Genetic_Algorithm.assets/score_1000.png)
 
 参考图案的尺寸是`35x35`像素，即基因的个数是3675个。在种群中个体的数量是100个、共迭代了1000代的情况下，耗时和各部分的比例如下。需要注意这个例子中计算适应度的函数非常简单，也就是说一般情况下产生新个体并不麻烦，评价个体的情况是花费时间最多的地方。
 
@@ -130,7 +131,7 @@ for i_loop in range(N_LOOP):
 
 之所以看遗传算法，一方面是因为在网上看到类似枯叶蝶之类的动物（以及更多的[自然界伪装高手 - 搜狐](https://www.sohu.com/a/145335883_737109)）时，总会有人说这么完美怎么可能是进化来的，一定是有“神”来设计。当然更多的人对这种观点是嗤之以鼻的，我就想可以借用遗传算法说明一下`进化=随机突变+自然选择`。
 
-![枯叶蝶](/img/in-post/{{page.id | replace:'/','-'}}/butterfly.gif)
+![枯叶蝶](/img/in-post/2021-08-07-Genetic_Algorithm.assets/butterfly.gif)
 
 另一方面是因为近几年人工智能大火，点开[IEEE TOP SERACHES](https://ieeexplore.ieee.org/popular/all)就会看到有近一半关键词与人工智能或者机器学习相关；常逛的EETOP也被站长把“AI”设置成了关键词，普通单词里挨着的俩字母也经常会被误认而改成大写划上下划线，搞得莫名其妙。我想应该稍微去涉猎一下，免得被时代落下太多。而人工智能的三大模型（专家系统、遗传算法、神经网络，好像也有其他的说法）中遗传算法最为简洁、直接，便从这下了手。
 

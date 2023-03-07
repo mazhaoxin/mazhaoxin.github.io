@@ -7,6 +7,7 @@ header-img: "img/bg-post/thinking.jpg"
 catalog:    true
 tags:
     - Others
+typora-root-url:	..
 ---
 
 > 其实我一直很好奇等退休了能拿到多少退休金，那些退休金相当于现在的多少钱。
@@ -77,7 +78,7 @@ tags:
 
 将在岗平均工资和增长比例绘制如下图所示，可见增长率是在下降的（近10年更像是线性增长），个人认为未来长期稳定在5%附近是可能的。
 
-![合肥市2000~2019年社平工资](/img/in-post/{{page.id | replace:'/','-'}}/hefei_average_salary_2000_2019.png)
+![合肥市2000~2019年社平工资](/img/in-post/2020-07-11-Pension_Calculation.assets/hefei_average_salary_2000_2019.png)
 
 ## 2.2. 缴费工资指数
 
@@ -121,7 +122,7 @@ tags:
 
 官方提供了一个在线工具可用于测算养老金：[http://si.12333.gov.cn/157569.jhtml](http://si.12333.gov.cn/157569.jhtml)。如下图所示：
 
-![官方测算工具-女](/img/in-post/{{page.id | replace:'/','-'}}/offical_calculation_female.png)
+![官方测算工具-女](/img/in-post/2020-07-11-Pension_Calculation.assets/offical_calculation_female.png)
 
 但这个工具不能解决我的疑问：等到领取养老金时，那些钱相当于现在的多少钱（购买力）？如果需要自费缴纳社保应当如何选择？因此我写了个小脚本，来做相关的计算。
 
@@ -152,7 +153,7 @@ k_yuebao_rate = 0.02
 
 运行后可以得到如下的报表（以第一年工作时的上年社平工资为基准进行计算），上半部分详细地列出了每年的缴费情况、个人账户余额增长情况等，下半部分给出了简单的综述，同时给出了*养老金相对社平工资的倍数*。
 
-![我的脚本输出结果](/img/in-post/{{page.id | replace:'/','-'}}/my_calculation_female.png)
+![我的脚本输出结果](/img/in-post/2020-07-11-Pension_Calculation.assets/my_calculation_female.png)
 
 计算结果与官方的基本一致（个人账户1180 vs 1194，基本养老金2161 vs 2161。官方工具中以月为单位，我的脚本中以年为单位，个人账户的差距应该是利息的计算方法不同）。
 
@@ -192,11 +193,11 @@ k_yuebao_rate = 0.02
 
 据此绘制曲线如下，显然回本是件蛮困难的事（女性更加困难），如果考虑自费部分的时间成本的话估计更难了。
 
-![比值曲线](/img/in-post/{{page.id | replace:'/','-'}}/plot_self_add_money.png)
+![比值曲线](/img/in-post/2020-07-11-Pension_Calculation.assets/plot_self_add_money.png)
 
 在以上测算和评估中使用的模型非常简单（如未考虑社平工资增长率变化、工作期间缴费工资指数变化、记账利率变化、更换城市缴纳社保等等的情况），但结论是相对悲观的。而随着人口结构的变化未来政策可能还会调整，因此不能对企业职工社保抱有过高的期望。
 
 > 最后附上脚本，供参考：
 >
-> - 测算： [persion_calculation.py](/img/in-post/{{page.id | replace:'/','-'}}/persion_calculation.py)
-> - 自费评估： [persion_calculation_self.py](/img/in-post/{{page.id | replace:'/','-'}}/persion_calculation_self.py)
+> - 测算： [persion_calculation.py](/img/in-post/2020-07-11-Pension_Calculation.assets/persion_calculation.py)
+> - 自费评估： [persion_calculation_self.py](/img/in-post/2020-07-11-Pension_Calculation.assets/persion_calculation_self.py)

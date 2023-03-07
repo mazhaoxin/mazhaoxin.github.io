@@ -7,6 +7,7 @@ header-img: "img/bg-post/ic.jpg"
 catalog:    true
 tags:
     - IC
+typora-root-url:	..
 ---
 
 ## 1. 为什么和什么（Why and What）

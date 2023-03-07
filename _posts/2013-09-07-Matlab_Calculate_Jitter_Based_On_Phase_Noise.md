@@ -7,6 +7,7 @@ header-img: "img/bg-post/matlab.jpg"
 catalog:    true
 tags:
     - MATLAB
+typora-root-url:	..
 ---
 
 来源：<http://www.mathworks.cn/matlabcentral/fileexchange/22038-phase-noise-to-jitter/content/Pn2Jitter.m>

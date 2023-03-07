@@ -7,10 +7,11 @@ header-img: "img/bg-post/pll.jpg"
 catalog:    true
 tags:
     - PLL
+typora-root-url:	..
 ---
 
 先放一张忘了从哪扒下来的图：
-![](/img/in-post/{{page.id | replace:'/','-'}}.png)
+![](/img/in-post/2015-08-09-Calculate_IPN_Jitter_Based_On_Phase_Noise.assets/pn.png)
 
 **基本思路**：
 分段求积分相噪，相加得整体的积分相噪，进而得到以弧度为单位的相位抖动，最终转换为以时间为单位的Jitter。

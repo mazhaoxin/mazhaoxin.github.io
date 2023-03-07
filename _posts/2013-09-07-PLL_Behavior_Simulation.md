@@ -7,6 +7,7 @@ header-img: "img/bg-post/pll.jpg"
 catalog:    true
 tags:
     - PLL
+typora-root-url:	..
 ---
 
 ##### 一、MatlabSimulink

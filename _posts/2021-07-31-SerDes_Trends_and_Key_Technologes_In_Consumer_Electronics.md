@@ -8,6 +8,7 @@ catalog:    true
 tags:
     - Training
     - SerDes
+typora-root-url:	..
 ---
 
 > MediaTek再一次在东南大学和西安电子科技大学举办了暑期夏令营，今年的模拟IC部分由我来讲（之前的讲师没时间），PPT因为信息安全问题拿不出来，我就把讲稿整理了一下形成本文。

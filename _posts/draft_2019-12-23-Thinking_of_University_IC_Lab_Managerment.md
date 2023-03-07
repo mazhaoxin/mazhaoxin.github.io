@@ -7,6 +7,7 @@ header-img:	"img/bg-post/manager.jpg"
 catalog:	true
 tags:
 	- 管理
+typora-root-url:	..
 ---
 
 > 怎么想起来这个话题了呢？

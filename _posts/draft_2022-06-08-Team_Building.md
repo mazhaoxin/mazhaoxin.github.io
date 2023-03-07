@@ -7,9 +7,10 @@ header-img: "img/bg-post/manager.jpg"
 catlog: true
 tags:
       - MEME
+typora-root-url:	..
 ---
 
-![](/img/in-post/{{page.id | replace:'/','-'}}.png)
+![](/img/in-post/2022-06-08-Team_Building.assets/1.png)
 
 > 只是想吐槽一下最近的一次“团建”——居然搞到了接近晚上十一点，明天还要上班的前提下。
 >

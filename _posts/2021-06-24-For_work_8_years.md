@@ -7,6 +7,7 @@ header-img: "img/bg-post/thinking.jpg"
 catalog:    true
 tags:
     - Life
+typora-root-url:	..
 ---
 
 8年前的今天（2013年6月24日），我正式办理了入职手续，开启了工作生涯。

@@ -8,6 +8,7 @@ catalog:    true
 tags:
     - Cadence
     - Manager
+typora-root-url:	..
 ---
 
 俗话说“工欲善其事，必先利其器”，如果能让工作环境更整洁、用起来更顺手，那么工作效率必然也会高一些。

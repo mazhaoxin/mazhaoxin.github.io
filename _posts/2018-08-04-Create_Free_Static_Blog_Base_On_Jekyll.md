@@ -7,6 +7,7 @@ header-img: "img/bg-post/coding.jpg"
 catalog:    true
 tags:
     - Programing
+typora-root-url:	..
 ---
 
 > Update @2021/01/01
@@ -162,7 +163,7 @@ _posts: 博客文章存放目录，其中的文件必须是 YYYY-MM-DD-xxxxxxxx.
 5. 根据解析的HTML文档，由浏览器请求静态资源（css、js、img等）
 ```
 
-关于图片文件的整理，我采取的方法略有不同。首先，我把题图放在了`./img/bg-post`下面，具体的图片文件名不再加bg等前缀；然后，我把文章插图放在了`./img/in-post/-YYYY-MM-DD-xxxxxxxx/`下面，具体的文件名也不再加其他前缀。文件插图目录前面之所以有一个`-`是因为这样在文章中引用时可以直接采用`![](/img/in-post/\{\{page.id | replace:'/','-'\}\}/xxx.png)`的统一语句。
+关于图片文件的整理，我采取的方法略有不同。首先，我把题图放在了`./img/bg-post`下面，具体的图片文件名不再加bg等前缀；然后，我把文章插图放在了`./img/in-post/-YYYY-MM-DD-xxxxxxxx/`下面，具体的文件名也不再加其他前缀。文件插图目录前面之所以有一个`-`是因为这样在文章中引用时可以直接采用`![](/img/in-post/2018-08-04-Create_Free_Static_Blog_Base_On_Jekyll.assets/xxx.png)`的统一语句。
 
 ## 总结
 

@@ -7,6 +7,7 @@ header-img: "img/bg-post/coding.jpg"
 catalog:    true
 tags:
     - Programe
+typora-root-url:	..
 ---
 
 在IC design中经常需要一定的编程来提高工作效率，不同的工具或目的对编程语言的需求各不相同，而不同的编程语言又各有各的特点，今天简单梳理一下它们之间的应用场景和语法区别。

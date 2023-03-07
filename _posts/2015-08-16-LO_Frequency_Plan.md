@@ -7,15 +7,16 @@ header-img: "img/bg-post/pll.jpg"
 catalog:    true
 tags:
     - PLL
+typora-root-url:	..
 ---
 
 ## 概述
 
 LO DIV是位于VCO和mixer之间的模块，其作用是分频和驱动长走线，设计难点在于底噪。
-![](/img/in-post/{{page.id | replace:'/','-'}}/diagram.png)
+![](/img/in-post/2015-08-16-LO_Frequency_Plan.assets/diagram.png)
 
 不同的band有不同的频率覆盖范围，为了减小VCO的设计难度需要选择合适的分频方案。E-UTRA规定的band与频率的对应关系在3GPP或[wikipedia](https://en.wikipedia.org/wiki/E-UTRA)上可以查到。
-![](/img/in-post/{{page.id | replace:'/','-'}}/band_table.png)
+![](/img/in-post/2015-08-16-LO_Frequency_Plan.assets/band_table.png)
 
 一般来说，决定了所要支持的band、分频比步长、基本分频器、VCO的最高频率以及VCO的个数，最佳的LO分频方案就确定了。
 
@@ -77,7 +78,7 @@ end
 ```
 
 最后按照VCO调谐范围进行排序，即可找到调谐范围最小时的分频方案。本例的结果如下图所示，VCO的调谐范围需要55%左右，难以实现。
-![](/img/in-post/{{page.id | replace:'/','-'}}/plan_single_core.png)
+![](/img/in-post/2015-08-16-LO_Frequency_Plan.assets/plan_single_core.png)
 
 对于无法接受的结果可以通过增加VCO个数、提高VCO最高频率或采用/3/5分频器改善（若限制不在大分频比的band，采用/3/5分频器也没有作用，如本例），其中增加VCO个数是最直接、最有效的解决方法，缺点是会增加成本。
 
@@ -86,10 +87,10 @@ end
 增加一个VCO有时候不仅仅是增大了一个VCO的面积，还带来了布局布线上的困难，实在是不得已的办法。
 
 对于两个VCO，首先要确定的是哪些band放到core1，哪些band放到core2。很直接的想到了遍历，但是分法的数量随着band个数的增加呈指数形式（$n=\sum_{i=0}^{floor(k/2)} C_{k}^{i}$），以本例中的27个band来说就有67M种分法，遍历的困难太大。
-![](/img/in-post/{{page.id | replace:'/','-'}}/comb_num.png)
+![](/img/in-post/2015-08-16-LO_Frequency_Plan.assets/comb_num.png)
 
 把`f_l`和`f_h`按照大小顺序画出来会发现有很多band的频率范围是相近的，可以把它们分成一组，通过这种方法来大大减少分法。
-![](/img/in-post/{{page.id | replace:'/','-'}}/freq_range.png)
+![](/img/in-post/2015-08-16-LO_Frequency_Plan.assets/freq_range.png)
 
 因此双core方案的遍历方法是：
 
@@ -206,12 +207,12 @@ fprintf('\n');
 ```
 
 运行结果如下图所示：
-![](/img/in-post/{{page.id | replace:'/','-'}}/print_dual_core.png)
+![](/img/in-post/2015-08-16-LO_Frequency_Plan.assets/print_dual_core.png)
 
 ## 最终结果
 
 Up-link的LO方案：
-![](/img/in-post/{{page.id | replace:'/','-'}}/plan_dual_core_up.png)
+![](/img/in-post/2015-08-16-LO_Frequency_Plan.assets/plan_dual_core_up.png)
 
 Down-link的LO方案（TDD模式的都放到了Down-link中）：
-![](/img/in-post/{{page.id | replace:'/','-'}}/plan_dual_core_down.png)
+![](/img/in-post/2015-08-16-LO_Frequency_Plan.assets/plan_dual_core_down.png)

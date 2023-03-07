@@ -7,6 +7,7 @@ header-img: "img/bg-post/pll.jpg"
 catalog:    true
 tags:
     - PLL
+typora-root-url:	..
 ---
 
 > 前几天在饭桌上老大突然问了一个问题：DDS中的“S”为什么叫“综合器”？
@@ -17,7 +18,7 @@ tags:
 
 `synthesize`的名词形式是`synthesis`，根据[youdict](http://www.youdict.com/w/synthesis)上的说明，它是由`syn-`（一起）和`-thes`（做，同do）组合在一起的，本意是`一起做什么事`，引申为`合成`，在化学上用的比较多。网上有张图片看着不错，放在了下面。
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/Synthesizing_word.jpg)
+![](/img/in-post/2018-08-12-About_Frequency_Synthesizer.assets/Synthesizing_word.jpg)
 
 所以说，Digital IC Design Flow中的`synthesize`这步的名称看起来是非常合理的。它所做的操作是把RTL code转换成了由stdcell组成的netlist，也就是说把很多个stdcell（小片的东西）放在一起，让它们体现出了某种逻辑（行为）。这与化学上的合成非常类似，就像把很多个氨基酸放在一起，它们就体现为了具有某种功能的蛋白质。
 
@@ -45,7 +46,7 @@ tags:
 
 比如除频的方式（*别不把分频器当频综*），由输入时钟信号的沿触发，通过寄存器存储沿的个数，当个数达到一定值时清空寄存器并产生一个沿，周而复始。那么首先输出信号的沿出现的时刻必定与输入信号的某个沿相关。单纯的除频由于不能产生除了输入信号的沿以外的`时刻`，因此它的输出频率必定是受输入信号约束的。
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/Divider.png)
+![](/img/in-post/2018-08-12-About_Frequency_Synthesizer.assets/Divider.png)
 
 如上图所示的除10分频器时序图，输出信号反转（产生上升沿或下降沿）的时刻一定对应了输入信号的相应的上升沿。因此，**单沿触发的分频器不可能实现占空比为50%的奇数分频比**。
 
@@ -57,7 +58,7 @@ tags:
 
 下图所示的是一种基于DTC（数字时间转换器）的小数分频器（Frac-N Divider）的时序图，所示的分频比为4.75。
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/FracN_Divider.png)
+![](/img/in-post/2018-08-12-About_Frequency_Synthesizer.assets/FracN_Divider.png)
 
 显然分频比的步长越小，对DTC的要求就越高。
 
@@ -65,7 +66,7 @@ tags:
 
 直接数字合成（DDS）所用的方法相对特殊一些，其框图（参考自[Wikipedia](https://en.wikipedia.org/wiki/Direct_digital_synthesis)）如下所示，它首先在数字域产生了波形，然后通过DAC将其转换到模拟域，再通过滤波器滤除无用的镜像信号，即可获得想要的波形。由于数字域的灵活性，该方式几乎可以实现任意的波形，所以在函数信号发生器中有广泛应用。但由于实现的复杂度高、难以产生低噪声（抖动）的时钟信号，在现代通信电路和时钟产生器中并不多见。
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/DDS.png)
+![](/img/in-post/2018-08-12-About_Frequency_Synthesizer.assets/DDS.png)
 
 ### 闭环形式
 

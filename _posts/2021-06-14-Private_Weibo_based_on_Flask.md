@@ -8,13 +8,14 @@ catalog:    true
 tags:
     - Programing
     - Flask
+typora-root-url:	..
 ---
 
 自从宝宝出生以来，就有了很多很多拍照、录视频的冲动，并且希望按照时间顺序整理记录下来。但手机相册起不到精选的效果，发微博、朋友圈又太过招人烦，即使设为自己可见也有把隐私交到别人手里、备份迁移不方便之类的顾虑（有人人网和网易博客的前例）。家里的群晖NAS闲着也是闲着，我就有了在上面搭个*简单的*网站，用来发一些文字、图片、视频的想法。
 
 终于在今年春节假期时，利用3个睡午觉的时间，用Flask+Bootstrap做了第一阶段的实现。至今运行了4个月，感觉还不错，简陋是简陋了些，但又不是不能用……
 
-![1623665014576](/img/in-post/{{page.id | replace:'/','-'}}/1623665014576.png)
+![1623665014576](/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623665014576.png)
 
 # 规划
 
@@ -67,11 +68,11 @@ class Post(db.Model):
 
 展示的时候按照记录时间降序排列，每10篇分一页，格式是上面文字，中间图片，作者和日期放在下面的左右两侧，点击日期后进入详细展示页面，大约是下面的这种感觉。
 
-![1623665803248](/img/in-post/{{page.id | replace:'/','-'}}/1623665803248.png)
+![1623665803248](/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623665803248.png)
 
 分页则采用Bootstrap自带的样式，清晰直接（*最讨厌瀑布流了，中间退出就不能接着看了*）。
 
-![1623665906238](/img/in-post/{{page.id | replace:'/','-'}}/1623665906238.png)
+![1623665906238](/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623665906238.png)
 
 这里就不把模板代码放出来了，可以参考Flask+Bootstrap的相关教程和文档。
 
@@ -121,7 +122,7 @@ class PostForm(FlaskForm):
 
 实际界面如下图所示：
 
-![1623666563868](/img/in-post/{{page.id | replace:'/','-'}}/1623666563868.png)
+![1623666563868](/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623666563868.png)
 
 当点击`Submit`后，后端程序会把附件存到`/static/uploads/YYYY/MM/DD/`目录下（使用原文件名，其实这地方存在安全问题），并把路径记录到数据库中。如有多个附件，则用`|`符号分割。
 
@@ -129,7 +130,7 @@ class PostForm(FlaskForm):
 
 搜索栏放置于banner位置，在电脑上看是在页面的右上角，在手机上看默认处于隐藏状态，点击菜单按钮后显示，效果如下图所示。
 
-![1623671216529](/img/in-post/{{page.id | replace:'/','-'}}/1623671216529.png)
+![1623671216529](/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623671216529.png)
 
 后端程序获取到关键字后调用模型的`query.filter()`函数，以列表的形式展示，具体的代码也非常简单。
 

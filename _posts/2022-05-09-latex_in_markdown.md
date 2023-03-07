@@ -7,6 +7,7 @@ header-img: "img/bg-post/coding.jpg"
 catlog: true
 tags:
       - Programing
+typora-root-url:	..
 ---
 
 > 喜欢markdown的很重要一点就是能用latex语法写数学公式，而不用安装那庞大的latex环境。但是markdown和latex毕竟“每个人有他的脾气”，所以“相爱没有那么容易”。把一些经验和总结记录下来，已被不时之需。
@@ -31,7 +32,7 @@ tags:
 - `\alpha`：$\alpha$，`\delta`：$\delta$
 - `\Delta`：$\Delta$
 
-![greek_aphabet](/img/in-post/{{page.id | replace:'/','-'}}/greek_letters.jpg)
+![greek_aphabet](/img/in-post/2022-05-09-latex_in_markdown.assets/greek_letters.jpg)
 
 ### 角标
 

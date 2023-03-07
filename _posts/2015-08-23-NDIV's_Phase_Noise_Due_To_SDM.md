@@ -7,11 +7,12 @@ header-img: "img/bg-post/pll.jpg"
 catalog:    true
 tags:
     - PLL
+typora-root-url:	..
 ---
 
 SDM是PLL里很重要的一个噪声源，下面分析一下SDM对NDIV输出时钟相噪的影响。
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/diagram.png)
+![](/img/in-post/2015-08-23-NDIV's_Phase_Noise_Due_To_SDM.assets/diagram.png)
 
 ## NDIV的输出
 
@@ -55,7 +56,7 @@ PN_{NDIV} = {\frac{1}{12 \cdot f_{ref}} \cdot |(1-z^{-1})^{(\mathrm{sdm\_order}-
 $$
 
 最后放上理论值与仿真结果的对照：
-![](/img/in-post/{{page.id | replace:'/','-'}}/results.png)
+![](/img/in-post/2015-08-23-NDIV's_Phase_Noise_Due_To_SDM.assets/results.png)
 
 *注：此处的仿真结果为`two-sided PSD`。
 

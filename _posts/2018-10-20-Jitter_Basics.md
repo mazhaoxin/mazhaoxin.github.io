@@ -7,6 +7,7 @@ header-img: "img/bg-post/pll.jpg"
 catalog:    true
 tags:
     - PLL
+typora-root-url:	..
 ---
 
 > 自从加入M记后，开始比较密集的接触关于jitter的相关内容，并且发现有很多同事并不能很清楚的认识到jitter的分类和应用。通过查询各方面的资料，整理本文如下，以备不时之需。
@@ -16,11 +17,11 @@ tags:
 Jitter（抖动）是从**时域**评价时钟信号质量的重要参数。
 
 - 首先要明确的是它是一个*统计量*，因此有标准差（均方根，rms）和范围（峰峰值，p2p）；
-  ![](/img/in-post/{{page.id | replace:'/','-'}}/jitter_measurement.jpg)
+  ![](/img/in-post/2018-10-20-Jitter_Basics.assets/jitter_measurement.jpg)
 - 然后根据样本的类型可以划分成不同的分类，如Jabs（absolute jitter）、Jp（period jitter）、Jc2c（cycle-to-cycle jitter）等；
-  ![](/img/in-post/{{page.id | replace:'/','-'}}/jitter_types.jpg)
+  ![](/img/in-post/2018-10-20-Jitter_Basics.assets/jitter_types.jpg)
 - 再次是对于同一次统计又可以从中拆分出不同的构成（成分），如bounded jitter和unbounded jitter。其中一般认为unbounded jitter是呈高斯分布的，因此在计算峰峰值时会根据误码率（BER）将均方根值乘以一个系数。
-  ![](/img/in-post/{{page.id | replace:'/','-'}}/jitter_components.jpg)
+  ![](/img/in-post/2018-10-20-Jitter_Basics.assets/jitter_components.jpg)
 
 另外，要明确的是在jitter的分类中，存在着一定的歧义或别名，如absolute jitter也被称为phase jitter，period jitter也被称为cycle jitter等等。
 
@@ -36,7 +37,7 @@ Phase noise到jitter的转换是通过积分相噪（IPN）进行的，具体的
 
 Jabs所统计的对象是**实际时钟跳变沿出现的时刻与理想时钟跳变沿出现的时刻之间的差**，因此也叫phase jitter，如下图所示。（注：实际测试中没有所谓的*理想时钟*，一般指的是被测信号的线性回归值，下同）
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/phase_jitter.jpg)
+![](/img/in-post/2018-10-20-Jitter_Basics.assets/phase_jitter.jpg)
 
 一般ADC、DAC应用关心这类jitter的rms值。
 
@@ -54,11 +55,11 @@ $$
 
 Jp所统计的对象是**相邻两个实际时钟跳变沿出现的时间间隔与理论值的差**或**实际时钟周期与理想时钟周期的差**，在测试中所谓理想时钟周期即是平均时钟周期，如下图所示：
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/period_jitter.jpg)
+![](/img/in-post/2018-10-20-Jitter_Basics.assets/period_jitter.jpg)
 
 一般在数字电路（如MCU、CPU）应用中关心这类jitter的峰峰值。
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/sta.jpg)
+![](/img/in-post/2018-10-20-Jitter_Basics.assets/sta.jpg)
 
 以上图所示的电路为例（为方便计算，假设clk1、clk2均为理想的clk），则有
 
@@ -105,7 +106,7 @@ $$
 
 Jc2c所统计的对象是**相邻两个实际时钟周期之间的差**，如下图所示：
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/cycle2cycle_jitter.jpg)
+![](/img/in-post/2018-10-20-Jitter_Basics.assets/cycle2cycle_jitter.jpg)
 
 显然这类jitter不需要参考理想时钟，一般在并行接口应用中关心它的峰峰值。
 
@@ -121,7 +122,7 @@ $$
 
 Jacc所统计的对象是**相距k个时钟跳变沿的时间间隔与理论值的差**，显然当k=1时即是Jp，当k=∞时即是Jabs。
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/acc_jitter.jpg)
+![](/img/in-post/2018-10-20-Jitter_Basics.assets/acc_jitter.jpg)
 
 对于提供同步时钟，但时钟频率低于数据速率的场景会关心累计抖动。
 
@@ -135,7 +136,7 @@ $$
 
 对于给SerDes Tx提供驱动的时钟来说，其jitter大小要把CDR的影响考虑进来。
 
-![](/img/in-post/{{page.id | replace:'/','-'}}/cdr.jpg)
+![](/img/in-post/2018-10-20-Jitter_Basics.assets/cdr.jpg)
 
 具体的在此不做详述，后续再写一篇梳理一下常见标准的CDR参数。
 
