@@ -12,6 +12,9 @@ typora-root-url:	..
 
 先放一张忘了从哪扒下来的图：
 ![](/img/in-post/2015-08-09-Calculate_IPN_Jitter_Based_On_Phase_Noise.assets/pn.png)
+> Update @20240509
+> 
+> Ref: [https://www.analog.com/media/en/training-seminars/tutorials/MT-008.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-008.pdf)
 
 **基本思路**：
 分段求积分相噪，相加得整体的积分相噪，进而得到以弧度为单位的相位抖动，最终转换为以时间为单位的Jitter。
