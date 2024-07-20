@@ -73,8 +73,8 @@ Gunicorn可以用文件进行配置，这个配置文件是个Python脚本，其
 workers = 1
 threads = 2
 
-bind = '127.0.0.1:5001'			# important
-raw_env = ['SCRIPT_NAME=/app1']	# important
+bind = '127.0.0.1:5001'         # important
+raw_env = ['SCRIPT_NAME=/app1'] # important
 
 accesslog = '/var/log/gunicorn_access.log'
 errorlog = '/var/log/gunicorn_error.log'
@@ -96,8 +96,8 @@ Flask照常解析、路由即可，但是页面中的链接要怎么保证是正
 显然，写死（hard-coding）的部分是无法正确处理的。而通过`url_for()`函数生成的链接，可以读取`SCRIPT_NAME`的设置，自动加上前缀，从而保证链接是正确的。也就是说，Flask App能正常运行还需要一个前提——**无论是js、css、image之类的静态文件，还是页面之间的链接，都要用`url_for()`生成。**
 
 ``` html
-<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-<a class="navbar-brand" href="{{ url_for('index') }}">App Home</a>
+<link rel="stylesheet" href="{ { url_for('static', filename='css/bootstrap.min.css') }}">
+<a class="navbar-brand" href="{ { url_for('index') }}">App Home</a>
 ```
 
 > 此处还踩了一个坑：Flask配置参数中有个`APPLICATION_ROOT`看起来更“浓眉大眼”一些，实际上它也能为`url_for()`生成的链接添加前缀，但它并不能实现我想要的效果。*好像是它仅在请求外才能生效，用`with app.test_request_context()`测试是可以工作，在实际使用时却没生效，没有细究原因。*
