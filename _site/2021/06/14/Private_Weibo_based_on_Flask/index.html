@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="v0uNv3nx9jZLk-UxF0kPiGyotJ8tb-5YkP8IuUyUYsE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.
+">
+    <meta name="keywords"  content="马昭鑫, MaZhaoxin
+">
+    <meta name="theme-color" content="#000000">
+    
+    <title>基于Flask搭建私人微博 - 马昭鑫的博客 | MaZhaoxin's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2021/06/14/Private_Weibo_based_on_Flask/">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+  	<!-- <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+	<script src="//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">MaZhaoxin's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+					<li>
+						<a href="#" id="cb-search-btn">SEARCH</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/bg-post/coding.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Programing" title="Programing">Programing</a>
+                        
+                        <a class="tag" href="/tags/#Flask" title="Flask">Flask</a>
+                        
+                    </div>
+                    <h1>基于Flask搭建私人微博</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by MaZhaoxin on June 14, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>自从宝宝出生以来，就有了很多很多拍照、录视频的冲动，并且希望按照时间顺序整理记录下来。但手机相册起不到精选的效果，发微博、朋友圈又太过招人烦，即使设为自己可见也有把隐私交到别人手里、备份迁移不方便之类的顾虑（有人人网和网易博客的前例）。家里的群晖NAS闲着也是闲着，我就有了在上面搭个<em>简单的</em>网站，用来发一些文字、图片、视频的想法。</p>
+
+<p>终于在今年春节假期时，利用3个睡午觉的时间，用Flask+Bootstrap做了第一阶段的实现。至今运行了4个月，感觉还不错，简陋是简陋了些，但又不是不能用……</p>
+
+<p><img src="/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623665014576.png" alt="1623665014576" /></p>
+
+<h1 id="规划">规划</h1>
+
+<h2 id="功能">功能</h2>
+
+<p>因为我能力有限，功能一定越简单越好，考虑只实现以下功能：</p>
+
+<ul>
+  <li>列表展示：类似微博或者朋友圈的样子，上面是文字，下面是图片九宫格；</li>
+  <li>详细展示：可以点进去看到大一些的图片，类似图片点开放大的效果；</li>
+  <li>发表界面：即用来发表新的微博，考虑到有可能会补发，因此提供一个手填时间的功能；</li>
+  <li>搜索：可以用关键字搜索文本内容；</li>
+</ul>
+
+<p>其他的诸如评论、转发、点赞之类的交互功能全都不做，甚至为了留住真实的想法（主要是懒）连编辑功能都不做。</p>
+
+<p>网站部署在NAS上，只提供内部局域网访问，以避免泄露隐私。</p>
+
+<h2 id="技术选型">技术选型</h2>
+
+<p>上大学时我只学过ASP，不过现在对VB6这种老旧的编程语言实在是提不起兴趣来。基于“少写代码多做事”的基本思想考虑使用Python，而基于Python的Web框架中Flask比较轻，资料又全，因此后端就选择了Flask。</p>
+
+<p>前端则选用了同样比较轻的Bootstrap，由于它是响应式布局，在电脑和手机上都有很好的效果。</p>
+
+<p>至于数据库——我计划将上传的图片、视频以日期为目录存储在文件系统中，数据库里只存放文本，并且完全没有并发的需求，就用Python自带驱动的sqlite+数据库文件实现。</p>
+
+<p>理论上还需要网关接口（WSGI），但同样因为没有并发需求，直接用Flask自带的开发服务器就得了。</p>
+
+<h1 id="具体实现">具体实现</h1>
+
+<p>按照Flask的教程，至少要做3件事情：</p>
+
+<ul>
+  <li>编写数据模型（Model）：即数据要怎么存，每篇文章包含哪些要素；</li>
+  <li>编写视图函数（View）：其中包括了路由，即网址要怎么解析到各个功能上；</li>
+  <li>设计渲染模板（Template）：即打开网址后看到的页面长什么样。</li>
+</ul>
+
+<p>下面按照各功能做个简单的介绍。</p>
+
+<h2 id="列表展示">列表展示</h2>
+
+<p>首先考虑每篇文章的要素，应该包括索引号、文字、作者、附件路径（附件存储到文件系统中）、创建时间、记录时间。这里的记录时间即这件事发生的时间，是可以手填的。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>    
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">String</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">attachments</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">String</span><span class="p">(</span><span class="mi">400</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">created_time</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">())</span> <span class="c1"># new post created time
+</span>    <span class="n">record_time</span> <span class="o">=</span> <span class="n">db</span><span class="p">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c1"># diary record time
+</span></code></pre></div></div>
+
+<p>展示的时候按照记录时间降序排列，每10篇分一页，格式是上面文字，中间图片，作者和日期放在下面的左右两侧，点击日期后进入详细展示页面，大约是下面的这种感觉。</p>
+
+<p><img src="/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623665803248.png" alt="1623665803248" /></p>
+
+<p>分页则采用Bootstrap自带的样式，清晰直接（<em>最讨厌瀑布流了，中间退出就不能接着看了</em>）。</p>
+
+<p><img src="/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623665906238.png" alt="1623665906238" /></p>
+
+<p>这里就不把模板代码放出来了，可以参考Flask+Bootstrap的相关教程和文档。</p>
+
+<p>视图函数只需要下面简单的几行即可（真·少些代码多做事）。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'GET'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'page'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">pagination</span> <span class="o">=</span> <span class="n">Post</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Post</span><span class="p">.</span><span class="n">record_time</span><span class="p">.</span><span class="n">desc</span><span class="p">()).</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">ITEMS_PER_PAGE</span><span class="p">)</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">pagination</span><span class="p">.</span><span class="n">items</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">,</span> <span class="n">posts</span><span class="o">=</span><span class="n">posts</span><span class="p">,</span> <span class="n">pagination</span><span class="o">=</span><span class="n">pagination</span><span class="p">,</span> <span class="n">attach_type</span><span class="o">=</span><span class="n">attach_type</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="详细展示">详细展示</h2>
+
+<p>因为点击图片后左右滑动的效果我不会写，就用最简单的自上向下平铺的方式展示大图。</p>
+
+<p>代码同样非常简单，这里多做了个异常处理，当根据索引号找不到文章时跳回首页并提示<code class="language-plaintext highlighter-rouge">No post found</code>。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/view/&lt;id&gt;'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'GET'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">view</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">post</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'view.html'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">'View'</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="n">post</span><span class="p">,</span> <span class="n">attach_type</span><span class="o">=</span><span class="n">attach_type</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s">'No post found.'</span><span class="p">,</span> <span class="s">'danger'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s">'index'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>因为不支持流媒体播放，视频要下载下来才能观看。展示界面只放一个图片链接，点击后自动下载播放（幸好是在局域网内，有足够大的带宽，稍大的文件也只要略微一等就好）。</p>
+
+<h2 id="发表">发表</h2>
+
+<p>发表界面自然要用到HTML表单（Form），这里采用Flask-WTF渲染。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PostForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">TextAreaField</span><span class="p">(</span><span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s">'placeholder'</span><span class="p">:</span> <span class="s">'Enter anything you want to record ...'</span><span class="p">})</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">()</span>
+    <span class="n">attachments</span> <span class="o">=</span> <span class="n">MultipleFileField</span><span class="p">()</span>
+    <span class="n">record_time</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">"When did it happen?"</span><span class="p">,</span> 
+        <span class="n">render_kw</span><span class="o">=</span><span class="p">{</span><span class="s">'placeholder'</span><span class="p">:</span> <span class="s">'YYYY-MM-DD hh:mm:ss'</span><span class="p">})</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>实际界面如下图所示：</p>
+
+<p><img src="/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623666563868.png" alt="1623666563868" /></p>
+
+<p>当点击<code class="language-plaintext highlighter-rouge">Submit</code>后，后端程序会把附件存到<code class="language-plaintext highlighter-rouge">/static/uploads/YYYY/MM/DD/</code>目录下（使用原文件名，其实这地方存在安全问题），并把路径记录到数据库中。如有多个附件，则用<code class="language-plaintext highlighter-rouge">|</code>符号分割。</p>
+
+<h2 id="搜索">搜索</h2>
+
+<p>搜索栏放置于banner位置，在电脑上看是在页面的右上角，在手机上看默认处于隐藏状态，点击菜单按钮后显示，效果如下图所示。</p>
+
+<p><img src="/img/in-post/2021-06-14-Private_Weibo_based_on_Flask.assets/1623671216529.png" alt="1623671216529" /></p>
+
+<p>后端程序获取到关键字后调用模型的<code class="language-plaintext highlighter-rouge">query.filter()</code>函数，以列表的形式展示，具体的代码也非常简单。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/search'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'GET'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+    <span class="n">kw</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'kw'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'page'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    
+    <span class="n">pagination</span> <span class="o">=</span> <span class="n">Post</span><span class="p">.</span><span class="n">query</span><span class="p">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">Post</span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="n">like</span><span class="p">(</span><span class="s">'%'</span><span class="o">+</span><span class="n">kw</span><span class="o">+</span><span class="s">'%'</span><span class="p">)).</span><span class="n">order_by</span><span class="p">(</span><span class="n">Post</span><span class="p">.</span><span class="n">record_time</span><span class="p">.</span><span class="n">desc</span><span class="p">()).</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">ITEMS_PER_PAGE</span><span class="p">)</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">pagination</span><span class="p">.</span><span class="n">items</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'search.html'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">'Search'</span><span class="p">,</span> <span class="n">kw</span><span class="o">=</span><span class="n">kw</span><span class="p">,</span> <span class="n">posts</span><span class="o">=</span><span class="n">posts</span><span class="p">,</span> <span class="n">pagination</span><span class="o">=</span><span class="n">pagination</span><span class="p">,</span> <span class="n">attach_type</span><span class="o">=</span><span class="n">attach_type</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>至此，这个网站的开发工作就基本结束了，数据模型的代码约15行，视图函数的代码约60行，渲染模板的代码总计约150行，再加上辅助函数等其他代码约20行，不得不说非常简约。</p>
+
+<h1 id="部署">部署</h1>
+
+<p>群晖NAS默认是不支持部署Flask的，因此还有一点点工作要做。</p>
+
+<p>以管理员身份登录NAS的Web管理界面后，在<code class="language-plaintext highlighter-rouge">套件中心</code>查找并安装Python3，在<code class="language-plaintext highlighter-rouge">控制面板 - 终端机和SNMP</code>中启动SSH功能。通过SSH连接到NAS后安装上传全部的文件，用<code class="language-plaintext highlighter-rouge">pip</code>命令安装所需要的包（见文尾总结），执行<code class="language-plaintext highlighter-rouge">run.py</code>后应该可以通过网址<code class="language-plaintext highlighter-rouge">http://NAS的IP:5000</code>看到页面（也可以用<code class="language-plaintext highlighter-rouge">.locals</code>域名访问，更简单方便）。<code class="language-plaintext highlighter-rouge">run.py</code>内容如下：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">LifeDiary</span> <span class="kn">import</span> <span class="n">app</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">'0.0.0.0'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>为了防止有bug时Web自动退出，可以在<code class="language-plaintext highlighter-rouge">任务计划</code>中添加自动启动的指令，反正如果原先的没有退出，新的由于端口被占用也不会启动成功，不用担心有多个程序同时在跑的情况。</p>
+
+<h1 id="总结">总结</h1>
+
+<p>虽然这个网站很简陋，但是我们用的还挺开心，至今4个月的时间发了约40篇<em>图文并茂</em>的生活琐事，也不枉我3天没睡午觉吧。XD</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>项目</th>
+      <th>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>后端语言</td>
+      <td>Python</td>
+    </tr>
+    <tr>
+      <td>后端框架</td>
+      <td>Flask</td>
+    </tr>
+    <tr>
+      <td>网关接口</td>
+      <td>(无)</td>
+    </tr>
+    <tr>
+      <td>反向代理</td>
+      <td>Nginx (NAS自带)</td>
+    </tr>
+    <tr>
+      <td>前端框架</td>
+      <td>Bootstrap</td>
+    </tr>
+    <tr>
+      <td>数据库</td>
+      <td>sqlite+单文件</td>
+    </tr>
+    <tr>
+      <td>后端插件/包</td>
+      <td>flask-sqlalchemy, flask-wtf, bootstrap-flask</td>
+    </tr>
+    <tr>
+      <td>前端插件/包</td>
+      <td>(无)</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>最后，如果非得说ASP比Flask强的地方，我觉得是建立子站点。对于ASP来说，只要把文件复制过去，子站点就算建好了，因为它的路由系统就是文件系统。而Flask则需要注册，对我来说还是略嫌麻烦。</p>
+</blockquote>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/06/10/Win10_settings_and_apps/" data-toggle="tooltip" data-placement="top" title="Win10配置及应用软件推荐">
+                        Previous<br>
+                        <span>Win10配置及应用软件推荐</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/06/24/For_work_8_years/" data-toggle="tooltip" data-placement="top" title="写在入职满8周年之际">
+                        Next<br>
+                        <span>写在入职满8周年之际</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#MATLAB" title="MATLAB" rel="4">
+                                    MATLAB
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PLL" title="PLL" rel="11">
+                                    PLL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Programing" title="Programing" rel="4">
+                                    Programing
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Math" title="Math" rel="2">
+                                    Math
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Others" title="Others" rel="2">
+                                    Others
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Flask" title="Flask" rel="2">
+                                    Flask
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Training" title="Training" rel="2">
+                                    Training
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SerDes" title="SerDes" rel="2">
+                                    SerDes
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="#">(none)</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<!--
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+-->
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; MaZhaoxin's Blog 2024
+                    <br>
+					Powered by <a href="https://jekyllrb.com/" style="font-weight: bold">Jekyll</a> |
+					Themed by <a href="http://huangxuan.me" style="font-weight: bold">Hux</a> |
+					Hosted by <a href="https://pages.github.com/" style="font-weight: bold">GitHub Pages</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<!-- <script src="/js/jquery.min.js "></script> -->
+<script src="//cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- <script src="/js/bootstrap.min.js "></script> -->
+<script src="//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Jekyll Search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="Title / Date / Tags" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="v0uNv3nx9jZLk-UxF0kPiGyotJ8tb-5YkP8IuUyUYsE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.
+">
+    <meta name="keywords"  content="马昭鑫, MaZhaoxin
+">
+    <meta name="theme-color" content="#000000">
+    
+    <title>LO Frequency Plan - 马昭鑫的博客 | MaZhaoxin's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2015/08/16/LO_Frequency_Plan/">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+  	<!-- <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+	<script src="//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">MaZhaoxin's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+					<li>
+						<a href="#" id="cb-search-btn">SEARCH</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/bg-post/pll.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#PLL" title="PLL">PLL</a>
+                        
+                    </div>
+                    <h1>LO Frequency Plan</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by MaZhaoxin on August 16, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h2 id="概述">概述</h2>
+
+<p>LO DIV是位于VCO和mixer之间的模块，其作用是分频和驱动长走线，设计难点在于底噪。
+<img src="/img/in-post/2015-08-16-LO_Frequency_Plan.assets/diagram.png" alt="" /></p>
+
+<p>不同的band有不同的频率覆盖范围，为了减小VCO的设计难度需要选择合适的分频方案。E-UTRA规定的band与频率的对应关系在3GPP或<a href="https://en.wikipedia.org/wiki/E-UTRA">wikipedia</a>上可以查到。
+<img src="/img/in-post/2015-08-16-LO_Frequency_Plan.assets/band_table.png" alt="" /></p>
+
+<p>一般来说，决定了所要支持的band、分频比步长、基本分频器、VCO的最高频率以及VCO的个数，最佳的LO分频方案就确定了。</p>
+
+<ul>
+  <li>所要支持的band决定于产品的定位，不需多说。</li>
+  <li>分频比步长决定于mixer结构，即如果需要正交时钟就至少有个除2，如果需要8相位时钟就至少有个除4，这项选择会非常大的影响能选用的方案。</li>
+  <li>基本分频器决定于技术储备，如果不能驾驭除3、除5那就老老实实的只用除2吧。</li>
+  <li>VCO的最高频率决定于所用工艺，频率越高对寄生约敏感，暂以40nm工艺8GHz为上限进行讨论，实际能做多高还要看VCO设计工程师的水平。</li>
+  <li>VCO的个数决定于规划的最大面积，也就是用成本换性能。</li>
+</ul>
+
+<p>在选取方案时最重要的一个考虑项是VCO所需的<code class="language-plaintext highlighter-rouge">调谐范围</code>，这是因为<strong>宽调谐范围通常意味着小Q值的电感，即较差的相位噪声</strong>。如果两个VCO的话还可以考虑把对噪声要求高的band都放在一个调谐范围小的core里。</p>
+
+<h2 id="单core方案">单core方案</h2>
+
+<p>由所需覆盖的分频后的频率范围和设定的VCO最高频率可以得出可用的最大分频比，再由分频比步长和可用的基本分频器种类得出真正可用的所有分频比。（此处把f_max调整到了8080MHz，是因为max(f_h)*4=8080，若不调整会出现无法全面遍历的问题）</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Up-link, f_max=8GHz, /2 could be used, /2 at least needed</span>
+<span class="n">f_l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1850</span><span class="p">,</span> <span class="mi">1710</span><span class="p">,</span> <span class="mi">1710</span><span class="p">,</span> <span class="mi">824</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">880</span><span class="p">,</span> <span class="mf">1749.9</span><span class="p">,</span> <span class="mi">1710</span><span class="p">,</span> <span class="mf">1427.9</span><span class="p">,</span> <span class="mi">699</span><span class="p">,</span> <span class="mi">777</span><span class="p">,</span> <span class="mi">788</span><span class="p">,</span> <span class="mi">704</span><span class="p">,</span> <span class="mi">815</span><span class="p">,</span> <span class="mi">830</span><span class="p">,</span> <span class="mi">832</span><span class="p">,</span> <span class="mf">1447.9</span><span class="p">,</span> <span class="mi">3410</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mf">1626.5</span><span class="p">,</span> <span class="mi">1850</span><span class="p">,</span> <span class="mi">814</span><span class="p">,</span> <span class="mi">807</span><span class="p">,</span> <span class="mi">703</span><span class="p">,</span> <span class="mi">2305</span><span class="p">,</span> <span class="mf">452.5</span><span class="p">];</span>
+<span class="n">f_h</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1980</span><span class="p">,</span> <span class="mi">1910</span><span class="p">,</span> <span class="mi">1785</span><span class="p">,</span> <span class="mi">1755</span><span class="p">,</span> <span class="mi">849</span><span class="p">,</span> <span class="mi">2570</span><span class="p">,</span> <span class="mi">915</span><span class="p">,</span> <span class="mf">1784.9</span><span class="p">,</span> <span class="mi">1770</span><span class="p">,</span> <span class="mf">1447.9</span><span class="p">,</span> <span class="mi">716</span><span class="p">,</span> <span class="mi">787</span><span class="p">,</span> <span class="mi">798</span><span class="p">,</span> <span class="mi">716</span><span class="p">,</span> <span class="mi">830</span><span class="p">,</span> <span class="mi">845</span><span class="p">,</span> <span class="mi">862</span><span class="p">,</span> <span class="mf">1462.9</span><span class="p">,</span> <span class="mi">3490</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="mf">1660.5</span><span class="p">,</span> <span class="mi">1915</span><span class="p">,</span> <span class="mi">849</span><span class="p">,</span> <span class="mi">824</span><span class="p">,</span> <span class="mi">748</span><span class="p">,</span> <span class="mi">2315</span><span class="p">,</span> <span class="mf">457.5</span><span class="p">];</span>
+<span class="n">f_max</span>  <span class="o">=</span> <span class="mi">8080</span><span class="p">;</span>
+<span class="n">div_max</span><span class="o">=</span> <span class="nb">ceil</span><span class="p">(</span><span class="n">f_max</span><span class="p">/</span><span class="nb">min</span><span class="p">(</span><span class="n">f_h</span><span class="p">));</span>
+<span class="n">basic_div</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">divs</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">div_max</span>
+	<span class="n">tmp</span> <span class="o">=</span> <span class="nb">unique</span><span class="p">(</span><span class="nb">factor</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+	<span class="nb">flag</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nb">nnz</span><span class="p">(</span><span class="n">basic_div</span><span class="o">-</span><span class="n">tmp</span><span class="p">(</span><span class="n">j</span><span class="p">))</span><span class="o">==</span><span class="nb">length</span><span class="p">(</span><span class="n">basic_div</span><span class="p">)</span>
+			<span class="nb">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="k">break</span><span class="p">;</span>
+		<span class="k">end</span>
+	<span class="k">end</span>
+	<span class="k">if</span> <span class="nb">flag</span><span class="o">==</span><span class="mi">0</span>
+		<span class="n">divs</span><span class="p">(</span><span class="k">end</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>得到了所有可用的分频比后就可以进行迭代了，初始方案为全都是最小分频比，后面的方案均继承前一个方案，然后调高限制最低频率的band的分频比，直到VCO的最高频率超过设置的f_max或限制最低频率的band的分频比已是最大值。</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">while</span> <span class="mi">1</span>
+	<span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span>
+		<span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">:)</span> <span class="o">=</span> <span class="n">divs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">f_l</span><span class="p">));</span>
+	<span class="k">else</span>
+		<span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">:)</span> <span class="o">=</span> <span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:);</span>
+		<span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">i_l</span><span class="p">)</span>
+			<span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i_l</span><span class="p">(</span><span class="n">j</span><span class="p">))</span> <span class="o">=</span> <span class="n">next_div</span><span class="p">(</span><span class="n">divs</span><span class="p">,</span> <span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i_l</span><span class="p">(</span><span class="n">j</span><span class="p">)),</span> <span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+		<span class="k">end</span>
+	<span class="k">end</span>
+
+	<span class="p">[</span><span class="n">f_vco_l</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">f_vco_h</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>  <span class="n">f_vco_range</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i_l</span><span class="p">,</span> <span class="n">i_h</span><span class="p">]</span> <span class="o">=</span> <span class="k">...</span>
+		<span class="n">check_plan</span><span class="p">(</span><span class="n">f_l</span><span class="p">,</span> <span class="n">f_h</span><span class="p">,</span> <span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">,:));</span>
+	
+	<span class="k">if</span> <span class="n">f_vco_h</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">&gt;</span><span class="n">f_max</span> <span class="o">||</span> <span class="nb">max</span><span class="p">(</span><span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i_l</span><span class="p">))</span><span class="o">==</span><span class="n">divs</span><span class="p">(</span><span class="k">end</span><span class="p">)</span>
+		<span class="k">break</span><span class="p">;</span>
+	<span class="k">end</span>
+	<span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>最后按照VCO调谐范围进行排序，即可找到调谐范围最小时的分频方案。本例的结果如下图所示，VCO的调谐范围需要55%左右，难以实现。
+<img src="/img/in-post/2015-08-16-LO_Frequency_Plan.assets/plan_single_core.png" alt="" /></p>
+
+<p>对于无法接受的结果可以通过增加VCO个数、提高VCO最高频率或采用/3/5分频器改善（若限制不在大分频比的band，采用/3/5分频器也没有作用，如本例），其中增加VCO个数是最直接、最有效的解决方法，缺点是会增加成本。</p>
+
+<h2 id="双core方案">双core方案</h2>
+
+<p>增加一个VCO有时候不仅仅是增大了一个VCO的面积，还带来了布局布线上的困难，实在是不得已的办法。</p>
+
+<p>对于两个VCO，首先要确定的是哪些band放到core1，哪些band放到core2。很直接的想到了遍历，但是分法的数量随着band个数的增加呈指数形式（$n=\sum_{i=0}^{floor(k/2)} C_{k}^{i}$），以本例中的27个band来说就有67M种分法，遍历的困难太大。
+<img src="/img/in-post/2015-08-16-LO_Frequency_Plan.assets/comb_num.png" alt="" /></p>
+
+<p>把<code class="language-plaintext highlighter-rouge">f_l</code>和<code class="language-plaintext highlighter-rouge">f_h</code>按照大小顺序画出来会发现有很多band的频率范围是相近的，可以把它们分成一组，通过这种方法来大大减少分法。
+<img src="/img/in-post/2015-08-16-LO_Frequency_Plan.assets/freq_range.png" alt="" /></p>
+
+<p>因此双core方案的遍历方法是：</p>
+
+<ol>
+  <li>通过<code class="language-plaintext highlighter-rouge">分组-&gt;组合-&gt;映射回band</code>的方法把所有的分法都列出来；</li>
+  <li>依次求出每种分法的core1和core2的最佳方案；</li>
+  <li>以两个core的频率范围中的较大值作为当前分法的频率范围，进行排序，找出最佳方案。</li>
+</ol>
+
+<p>具体实现代码如下：</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f_l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1850</span><span class="p">,</span> <span class="mi">1710</span><span class="p">,</span> <span class="mi">1710</span><span class="p">,</span> <span class="mi">824</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">880</span><span class="p">,</span> <span class="mf">1749.9</span><span class="p">,</span> <span class="mi">1710</span><span class="p">,</span> <span class="mf">1427.9</span><span class="p">,</span> <span class="mi">699</span><span class="p">,</span> <span class="mi">777</span><span class="p">,</span> <span class="mi">788</span><span class="p">,</span> <span class="mi">704</span><span class="p">,</span> <span class="mi">815</span><span class="p">,</span> <span class="mi">830</span><span class="p">,</span> <span class="mi">832</span><span class="p">,</span> <span class="mf">1447.9</span><span class="p">,</span> <span class="mi">3410</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mf">1626.5</span><span class="p">,</span> <span class="mi">1850</span><span class="p">,</span> <span class="mi">814</span><span class="p">,</span> <span class="mi">807</span><span class="p">,</span> <span class="mi">703</span><span class="p">,</span> <span class="mi">2305</span><span class="p">,</span> <span class="mf">452.5</span><span class="p">];</span>
+<span class="n">f_h</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1980</span><span class="p">,</span> <span class="mi">1910</span><span class="p">,</span> <span class="mi">1785</span><span class="p">,</span> <span class="mi">1755</span><span class="p">,</span> <span class="mi">849</span><span class="p">,</span> <span class="mi">2570</span><span class="p">,</span> <span class="mi">915</span><span class="p">,</span> <span class="mf">1784.9</span><span class="p">,</span> <span class="mi">1770</span><span class="p">,</span> <span class="mf">1447.9</span><span class="p">,</span> <span class="mi">716</span><span class="p">,</span> <span class="mi">787</span><span class="p">,</span> <span class="mi">798</span><span class="p">,</span> <span class="mi">716</span><span class="p">,</span> <span class="mi">830</span><span class="p">,</span> <span class="mi">845</span><span class="p">,</span> <span class="mi">862</span><span class="p">,</span> <span class="mf">1462.9</span><span class="p">,</span> <span class="mi">3490</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="mf">1660.5</span><span class="p">,</span> <span class="mi">1915</span><span class="p">,</span> <span class="mi">849</span><span class="p">,</span> <span class="mi">824</span><span class="p">,</span> <span class="mi">748</span><span class="p">,</span> <span class="mi">2315</span><span class="p">,</span> <span class="mf">457.5</span><span class="p">];</span>
+<span class="n">group</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">];</span>
+
+<span class="c1">% 根据分组进行组合</span>
+<span class="n">u_group</span> <span class="o">=</span> <span class="nb">unique</span><span class="p">(</span><span class="nb">sort</span><span class="p">(</span><span class="n">group</span><span class="p">));</span>
+
+<span class="n">l_choose_group</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="nb">floor</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">u_group</span><span class="p">)/</span><span class="mi">2</span><span class="p">)</span>
+	<span class="n">l_choose_group</span> <span class="o">=</span> <span class="n">l_choose_group</span><span class="o">+</span><span class="nb">nchoosek</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">u_group</span><span class="p">),</span> <span class="n">i</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="n">choose_group</span><span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">l_choose_group</span><span class="p">,</span> <span class="nb">length</span><span class="p">(</span><span class="n">u_group</span><span class="p">));</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="nb">floor</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">u_group</span><span class="p">)/</span><span class="mi">2</span><span class="p">)</span>
+	<span class="n">tmp</span> <span class="o">=</span> <span class="nb">nchoosek</span><span class="p">(</span><span class="n">u_group</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+	<span class="k">if</span> <span class="nb">isempty</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+		<span class="n">choose_group</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">:)</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">u_group</span><span class="p">));</span>
+		<span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+	<span class="k">else</span>
+		<span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">tmp</span><span class="p">(:,</span><span class="mi">1</span><span class="p">))</span>
+			<span class="n">choose_group</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">:)</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">u_group</span><span class="p">));</span>
+			<span class="n">choose_group</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">tmp</span><span class="p">(</span><span class="n">j</span><span class="p">,:))</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+			<span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+		<span class="k">end</span>
+	<span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1">% 把组合结果映射回band</span>
+<span class="n">sel_core</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">choose_group</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)),</span> <span class="nb">length</span><span class="p">(</span><span class="n">group</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">choose_group</span><span class="p">(:,</span><span class="mi">1</span><span class="p">))</span>
+	<span class="n">tmp</span> <span class="o">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">choose_group</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span><span class="o">==</span><span class="mi">2</span><span class="p">);</span>
+	<span class="k">if</span> <span class="o">~</span><span class="nb">isempty</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+			<span class="n">sel_core</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">group</span><span class="o">==</span><span class="n">tmp</span><span class="p">(</span><span class="n">j</span><span class="p">))</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+		<span class="k">end</span>
+	<span class="k">end</span>
+<span class="k">end</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'\t分组完成，共计%d条。\n'</span><span class="p">,</span> <span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)));</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'\t开始遍历：'</span><span class="p">);</span>
+
+<span class="c1">% 逐条进行freq plan遍历，并将最好的方案汇总在一起</span>
+<span class="n">plans</span>       <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">sel_core</span><span class="p">));</span>
+<span class="n">f_vco1_range</span><span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">f_vco1_l</span>    <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">f_vco1_h</span>    <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">f_vco2_range</span><span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">f_vco2_l</span>    <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">f_vco2_h</span>    <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">f_vco_range</span> <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">1</span><span class="p">);</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">))</span>
+	<span class="k">if</span> <span class="nb">mod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">))/</span><span class="mi">10</span><span class="p">))</span><span class="o">==</span><span class="mi">0</span>
+		<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'.....%d%%'</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">100</span><span class="p">/</span><span class="nb">round</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)))));</span>
+	<span class="k">end</span>
+	
+	<span class="n">i1</span> <span class="o">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span><span class="o">==</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">i2</span> <span class="o">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(</span><span class="n">i</span><span class="p">,:)</span><span class="o">==</span><span class="mi">2</span><span class="p">);</span>
+	<span class="k">if</span> <span class="o">~</span><span class="nb">isempty</span><span class="p">(</span><span class="n">i1</span><span class="p">)</span>
+		<span class="p">[</span><span class="n">tplans</span><span class="p">,</span> <span class="n">tf_vco_range</span><span class="p">,</span> <span class="n">tf_vco_l</span><span class="p">,</span> <span class="n">tf_vco_h</span><span class="p">]</span> <span class="o">=</span> <span class="k">...</span>
+			<span class="n">do_freq_plan</span><span class="p">(</span><span class="n">f_l</span><span class="p">(</span><span class="n">i1</span><span class="p">),</span> <span class="n">f_h</span><span class="p">(</span><span class="n">i1</span><span class="p">));</span>
+		<span class="p">[</span><span class="n">tmp</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sort</span><span class="p">(</span><span class="n">tf_vco_range</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'ascend'</span><span class="p">);</span>
+		<span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i1</span><span class="p">)</span>    <span class="o">=</span> <span class="n">tplans</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="mi">1</span><span class="p">),:);</span>
+		<span class="n">f_vco1_range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">tf_vco_range</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+		<span class="n">f_vco1_l</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>     <span class="o">=</span> <span class="n">tf_vco_l</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+		<span class="n">f_vco1_h</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>     <span class="o">=</span> <span class="n">tf_vco_h</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+	<span class="k">end</span>
+	<span class="k">if</span> <span class="o">~</span><span class="nb">isempty</span><span class="p">(</span><span class="n">i2</span><span class="p">)</span>
+		<span class="p">[</span><span class="n">tplans</span><span class="p">,</span> <span class="n">tf_vco_range</span><span class="p">,</span> <span class="n">tf_vco_l</span><span class="p">,</span> <span class="n">tf_vco_h</span><span class="p">]</span> <span class="o">=</span> <span class="k">...</span>
+			<span class="n">do_freq_plan</span><span class="p">(</span><span class="n">f_l</span><span class="p">(</span><span class="n">i2</span><span class="p">),</span> <span class="n">f_h</span><span class="p">(</span><span class="n">i2</span><span class="p">));</span>
+		<span class="p">[</span><span class="n">tmp</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sort</span><span class="p">(</span><span class="n">tf_vco_range</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'ascend'</span><span class="p">);</span>
+		<span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i2</span><span class="p">)</span>    <span class="o">=</span> <span class="n">tplans</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="mi">1</span><span class="p">),:);</span>
+		<span class="n">f_vco2_range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">tf_vco_range</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+		<span class="n">f_vco2_l</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>     <span class="o">=</span> <span class="n">tf_vco_l</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+		<span class="n">f_vco2_h</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>     <span class="o">=</span> <span class="n">tf_vco_h</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+	<span class="k">end</span>
+	
+	<span class="n">f_vco_range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">f_vco1_range</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="n">f_vco2_range</span><span class="p">(</span><span class="n">i</span><span class="p">)]);</span>
+<span class="k">end</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'.....100%%\n'</span><span class="p">);</span>
+
+<span class="c1">% 按照range升序排序</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'\t== 单Core方案 ================================================\n'</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'\tRange = %.3f, Fmin = %.1fMHz, Fmax = %.1fMHz, %s\n'</span><span class="p">,</span> <span class="k">...</span>
+	<span class="n">f_vco1_range</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">f_vco1_l</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">f_vco1_h</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nb">num2str</span><span class="p">(</span><span class="n">plans</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">:)));</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'\t== 双Core方案 ================================================\n'</span><span class="p">);</span>
+<span class="n">j</span> <span class="o">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">f_vco_range</span><span class="o">==</span><span class="nb">min</span><span class="p">(</span><span class="n">f_vco_range</span><span class="p">));</span>
+<span class="n">sel_core</span>     <span class="o">=</span> <span class="n">sel_core</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="p">:);</span>
+<span class="n">plans</span>        <span class="o">=</span> <span class="n">plans</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="p">:);</span>
+<span class="n">f_vco1_range</span> <span class="o">=</span> <span class="n">f_vco1_range</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="n">f_vco1_l</span>     <span class="o">=</span> <span class="n">f_vco1_l</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="n">f_vco1_h</span>     <span class="o">=</span> <span class="n">f_vco1_h</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="n">f_vco2_range</span> <span class="o">=</span> <span class="n">f_vco2_range</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="n">f_vco2_l</span>     <span class="o">=</span> <span class="n">f_vco2_l</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="n">f_vco2_h</span>     <span class="o">=</span> <span class="n">f_vco2_h</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="n">f_vco_range</span>  <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="n">f_vco1_range</span><span class="p">,</span> <span class="n">f_vco2_range</span><span class="p">],</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">[</span><span class="n">tmp</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sort</span><span class="p">(</span><span class="n">f_vco_range</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'ascend'</span><span class="p">);</span>
+<span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+	<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'\tRange_1 = %.3f%%, Fmin_1 = %.1fMHz, Fmax_1 = %.1fMHz; Range_2 = %.3f%%, Fmin_2 = %.1fMHz, Fmax_2 = %.1fMHz; %s; %s\n'</span><span class="p">,</span> <span class="k">...</span>
+		<span class="n">f_vco1_range</span><span class="p">(</span><span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">f_vco1_l</span><span class="p">(</span><span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">)),</span> <span class="n">f_vco1_h</span><span class="p">(</span><span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">)),</span> <span class="k">...</span>
+		<span class="n">f_vco2_range</span><span class="p">(</span><span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">f_vco2_l</span><span class="p">(</span><span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">)),</span> <span class="n">f_vco2_h</span><span class="p">(</span><span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">)),</span> <span class="k">...</span>
+		<span class="nb">num2str</span><span class="p">(</span><span class="n">sel_core</span><span class="p">(</span><span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="p">:)),</span> <span class="nb">num2str</span><span class="p">(</span><span class="n">plans</span><span class="p">(</span><span class="n">i</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="p">:)));</span>
+<span class="k">end</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>运行结果如下图所示：
+<img src="/img/in-post/2015-08-16-LO_Frequency_Plan.assets/print_dual_core.png" alt="" /></p>
+
+<h2 id="最终结果">最终结果</h2>
+
+<p>Up-link的LO方案：
+<img src="/img/in-post/2015-08-16-LO_Frequency_Plan.assets/plan_dual_core_up.png" alt="" /></p>
+
+<p>Down-link的LO方案（TDD模式的都放到了Down-link中）：
+<img src="/img/in-post/2015-08-16-LO_Frequency_Plan.assets/plan_dual_core_down.png" alt="" /></p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2015/08/09/Add_Custom_Library_In_Simulink/" data-toggle="tooltip" data-placement="top" title="在Simulink中创建自己的Library">
+                        Previous<br>
+                        <span>在Simulink中创建自己的Library</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2015/08/23/NDIV's_Phase_Noise_Due_To_SDM/" data-toggle="tooltip" data-placement="top" title="SDM对分频器输出信号相位噪声的影响">
+                        Next<br>
+                        <span>SDM对分频器输出信号相位噪声的影响</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#MATLAB" title="MATLAB" rel="4">
+                                    MATLAB
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PLL" title="PLL" rel="11">
+                                    PLL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Programing" title="Programing" rel="4">
+                                    Programing
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Math" title="Math" rel="2">
+                                    Math
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Others" title="Others" rel="2">
+                                    Others
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Flask" title="Flask" rel="2">
+                                    Flask
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Training" title="Training" rel="2">
+                                    Training
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SerDes" title="SerDes" rel="2">
+                                    SerDes
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="#">(none)</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<!--
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+-->
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; MaZhaoxin's Blog 2024
+                    <br>
+					Powered by <a href="https://jekyllrb.com/" style="font-weight: bold">Jekyll</a> |
+					Themed by <a href="http://huangxuan.me" style="font-weight: bold">Hux</a> |
+					Hosted by <a href="https://pages.github.com/" style="font-weight: bold">GitHub Pages</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<!-- <script src="/js/jquery.min.js "></script> -->
+<script src="//cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- <script src="/js/bootstrap.min.js "></script> -->
+<script src="//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Jekyll Search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="Title / Date / Tags" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+</body>
+
+</html>

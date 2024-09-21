@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="v0uNv3nx9jZLk-UxF0kPiGyotJ8tb-5YkP8IuUyUYsE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.
+">
+    <meta name="keywords"  content="马昭鑫, MaZhaoxin
+">
+    <meta name="theme-color" content="#000000">
+    
+    <title>写在入职满8周年之际 - 马昭鑫的博客 | MaZhaoxin's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2021/06/24/For_work_8_years/">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+  	<!-- <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+	<script src="//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">MaZhaoxin's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+					<li>
+						<a href="#" id="cb-search-btn">SEARCH</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/bg-post/thinking.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Life" title="Life">Life</a>
+                        
+                    </div>
+                    <h1>写在入职满8周年之际</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by MaZhaoxin on June 24, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>8年前的今天（2013年6月24日），我正式办理了入职手续，开启了工作生涯。</p>
+
+<h1 id="报到与入职培训">报到与入职培训</h1>
+
+<p>华为有集中入职培训的传统，报到时间需要提前预选。一开始我在报到系统里选的是7月11号，后来答辩比我预计的要早，而我又没有什么毕业旅行之类的规划，就想早早的去报到，毕竟报到了就开始有工资了。可是再往前的日期都预约满了，我通过微博找到了一位上研的HR（Chen Zhishuo），在他的协助下才得以提前到6月20日的报到批次。</p>
+
+<p>报到须知上写着“<em>着装方面，男士请准备领带、白色衬衫、深色西装</em>”，而我这穷学生哪有现成的西装，我女朋友就斥巨资帮我购置了一套正装行头：西装、领带、衬衫、皮鞋、甚至还有袜子——一应俱全。我像宝贝一样带到上海，第一时间挂在衣柜里，怕起了褶子。可惜后来也就拍工卡照时穿了下，培训时好像只需要穿衬衫就行。再后来结婚时也没用上，迄今为止就穿了那几天，真真浪费了金钱和感情。</p>
+
+<p>报到后先暂住在公司提供的公寓里，都是双人标间，我和实验室的同学一间房。那几天过的还是很happy的，一方面是有新鲜感，另一方面是华为的大队培训的确搞得有模有样：一大早集合跑步做操，然后坐车去上研，5天的培训期内每天都安排的满满当当，一直到晚上九点左右，再坐车回公寓。培训内容有公司章程学习、优秀师兄师姐传授人生经验、头脑风暴、看电影等等。我记得当时看的电影是李幼斌主演的，讲述中国第一颗原子弹研发过程的电影——《横空出世》，从这也能看出任正非或者华为对待研发的态度。那几天白天就听各种培训课，熟悉上研基地的环境，晚上回到公寓悠哉悠哉地看dota2比赛，甚是惬意。</p>
+
+<p>入职前期还有件很重要的事情——租房。公寓只给住18天，我们要在这段时间内找好房子。我和那位同学一起找了几天，最终在一个二房东手里租下来了4间群租房里的两间。我记得房租好像是900块钱一个月，房子在5楼还是6楼来着，没电梯，胜在离公司近——公司往西骑车10分钟。4间里有一间是卫生间、厨房独享的一居室，我们和另一个住“阳台改”的哥们share另外的卫生间和厨房。说是“厨房”，其实就在入户的地方有个燃气灶和抽油烟机而已。反正就是个晚上睡觉的地方，对公共空间也没啥要求，房子有空调就已经很好了。我女朋友到了暑假来看我，我去上班时竟然连空调都不舍得开，晚上就去超市拎了台风扇。再后来一房东把房子卖掉，二房东赔给我们一个月房租让我们一个星期内搬走就是后话了。</p>
+
+<p>培训期满的周五下午，各部门派“导师”去培训教室领人，我和那位同学当时属于同一个四级部门。这里的“导师”就是带新人的mentor，我的“导师”当时胡子拉碴、一脑袋鸡窝一样的头发，我还以为他年龄很大，一口一个的“师父”称呼不停，后来才知道也就比我大三四岁而已。“导师”会帮新人熟悉工作环境、制定实习期的计划、带着新人认识一下同部门的同事等等，各公司应该都差不多。当时部门的办公环境跟大学的机房似的，没有格子间，一人一张1.2m长的白桌子，4人一排，两排面对面拼在一起，最头上再横一张桌子，坐个“头头”。他们称这一堆桌子为一个“岛”，头上的那位即为“岛主”，岛与岛之间是各人的保密柜，用来存放些个人物品。由于用的电脑全都是“瘦客机”，每人两个显示屏倒也不是很拥挤。这么坐的好处是方便大家沟通，缺点是吵，这种办公环境一直到3年多后才改为了格子间。</p>
+
+<h1 id="步入正轨">步入正轨</h1>
+
+<p>正式进入部门后开始做项目，值得庆幸的是我做的第一个项目是预研项目，进度不赶，好多东西大家一边讨论研究一边做，我从中学到了非常非常多的东西。前面提到的“导师”在我入职不到一个月的时候就被借调到了微波组，真正对我起到指导作用的是这个项目的系统工程师鹏哥。</p>
+
+<p>虽然过去很久了，有很多情景我依然记忆犹新：</p>
+
+<ul>
+  <li>用40nm工艺调12GHz的分频器，周末自己修改layout、抽寄生；</li>
+  <li>周末我在屋里睡懒觉，被老朱打电话叫去加班，其实我正准备一会去看周董打球；</li>
+  <li>Merlin投片前有几个case没跑完，熬的有点晚就索性在会议室睡了一觉（多亏有午休床）；</li>
+  <li>Merlin回片后环路工作异常，大家围在一起用片上数据采集接口分析讨论；</li>
+  <li>虽然分频器工作的不好，但还是拼凑了一篇专利；</li>
+  <li>实测发现QNC存在很低频率的周期性异常，我通过分析代码发现了截位导致的累加器溢出bug；</li>
+  <li>1102回片后一堆人等着PLL工作起来，我去debug发现有个寄存器配置的不对，PLL工作起来后大家一哄而散各忙各的；</li>
+  <li>Dolphin时根据鹏哥的建议做了个notch filter进去，实测效果非常好，激动的我在实验室直拍桌子；</li>
+  <li>我研究了一套相位噪声建模方法，模型仿真出来的相位噪声与实测几乎一致，后来还发现、解释了底噪wander现象，从此我对模型的信心大涨；</li>
+  <li>6351回片后芯片控制异常，后来我发现上位机计算奇偶校验时少算了一部分；</li>
+  <li>在鹏哥的指导下测两点调制，观察path timing mismatch对phase error的影响；</li>
+  <li>鹏哥像写学位论文一样写了份设计报告，成为我经常翻看学习的经典材料；</li>
+  <li>我写了一些自动化测试脚本，从此PLL组测试程序不求人；</li>
+  <li>有次EVB需要负电压，有个同事没注意接错了，钽电容就爆了……</li>
+  <li>有次正在实验室忙活突然有人说起火了，大家赶紧往外跑，后来才知道是有人拆手机用螺丝刀弄坏了电池；</li>
+  <li>周末去泰瑞达帮忙调试程序，顺便羡慕别人的悠闲生活；</li>
+  <li>还打车一个多小时去紘康支持，回来时都晚上了；</li>
+  <li>第一次坐飞机就是独自一个人直飞美国，还需要在美国转一次机，我还把单反相机、笔记本之类的贵重物品托运，现在想想真是心大……</li>
+  <li>一年两次的消防演习时园区里乌央乌央集体散步的人；</li>
+  <li>特别喜欢上研餐厅的食物，每次中午吃称重自助里的烤培根青瓜卷和炸龙利鱼就会很开心，在清真餐线还可以吃到拉面和羊肉串，后来别的餐线还有煎饼果子、小馄饨、油泼面、麻辣烫甚至飞饼；</li>
+  <li>每天午饭、晚饭后围着园区散步、闲聊；</li>
+  <li>晚饭后一起去打乒乓球；</li>
+  <li>周董拿着电脑去我租房的地方拍车牌，因为我的反应迟钝浪费一次机会……</li>
+  <li>拍碎了同事的水杯(◎_◎;)；</li>
+  <li>QA姐姐每次从成都去上海都给我们带冷吃兔，每次连花生米都被捡得干干净净；</li>
+  <li>新加坡的同事去上海还会带肉脯；</li>
+  <li>上海的同事从国外回来就会带巧克力——美食真是能稳定唤起美好印象的东西；</li>
+  <li>……</li>
+</ul>
+
+<p>有时候我也在想，为什么在上研的三年半里留下的好印象居多，可能是</p>
+
+<ul>
+  <li>当时做的东西偏纯技术，没有产品交付的压力和琐事，可以享受到“<strong>进一寸有一寸的欢喜</strong>”；</li>
+  <li>当时的讨论氛围非常好，遇到问题大家会坐下来（有时候直接去实验室对着测试平台坐一圈）讨论分析，而不是先想锅该怎么甩或者有个倒霉蛋去debug而其他人围观；</li>
+  <li>项目组直接交付产品，而不是一个IP，因此非常有存在感和成就感（1102试量产时先用到了Mate2上，好多新加坡的同事委托从上海出差的人带台回去，还有6362量产后有人拿着手机自豪地说这里面用了我们设计的芯片等）；</li>
+  <li>整个团队基本上在做同一个项目，目标的一致性让大家讨论技术问题也没隔阂，对这个项目也更有责任心；</li>
+</ul>
+
+<h1 id="另投东家">另投东家</h1>
+
+<p>虽然那段时间在工作上很开心，但是最终还是决定到合肥去，中间的原因和纠结不再多说，只记得鹏哥和老朱挽留了几次。</p>
+
+<p>有时候觉得换个环境也挺好，可以让人从另外的视角审视一下以前的东西：</p>
+
+<ul>
+  <li>比如说以前从没觉得做端到端交付有什么，后来发现只做IP时连顶层长什么样、用户怎么用都一无所知；</li>
+  <li>比如说以前从没觉得总部有什么了不起的，现在才发现总部的资源远远多于外站；</li>
+  <li>比如说以前感觉骑自行车也没啥，现在发现骑电瓶车还能在公司充电更好；</li>
+  <li>比如说以前没觉得月末周六的加班和“奋斗者协议”牺牲掉的5天法定年假有什么，现在安排周末计划时不用考虑是不是月末，还多了5天法定年假和7天福利年假，感觉——<strong>爽</strong>！</li>
+  <li>……</li>
+</ul>
+
+<p>环境真是个神奇的东西，一旦浸淫进去就会不闻鱼肆之臭、芝兰之香。</p>
+
+<p>到了合肥后的确花了些时间去适应和转变，不光是工作内容、公司氛围，还有<strong>生活</strong>。从2017年初回到合肥后，仿佛被按下了快进键：买房、买车、养狗、结婚、装修、生娃……几乎每个周末都有安排，再也没有闲的无聊去公司吹空调看文档的时候了。</p>
+
+<h1 id="8年纪念">8年纪念</h1>
+
+<p>对于华为员工来说，8年是一个<em>轮回</em>，因为要离职再入职，更换工号，还可以拿到9个月薪水和这些年攒下的月末周六加班费（如果没怎么请假的话差不多有17个月的工资，股票怎么算我不知道）——颇为丰厚。</p>
+
+<p>而我也只是想借这个机会纪念一下逝去的8年光阴：</p>
+
+<ul>
+  <li>8年前我24岁，除了一腔热血一无所有，现如今则”咸鱼“了很多，反正也没有上升空间了，有事情做就好；</li>
+  <li>8年前我只会做DLL、整数PLL，现在知识面广了很多，对IP的理解也比以前深刻了不少，反而少了许多对新知识的渴望；</li>
+  <li>8年前我带着与合肥的羁绊孑然一身前往上海，现在有了更具体含义上的“家”，也多了很多很多压力与牵挂；</li>
+  <li>8年前海思还在坐“冷板凳”，K3V2还在被嘲讽“万年不变”，8年里麒麟成事、成名却又被针对；</li>
+  <li>……</li>
+</ul>
+
+<p>最后想起一首诗，感觉与我现在的心境颇为契合：</p>
+
+<blockquote>
+  <p>种豆南山下，草盛豆苗稀。</p>
+
+  <p>晨兴理荒秽，带月荷锄归。</p>
+
+  <p>道狭草木长，夕露沾我衣。</p>
+
+  <p>衣沾不足惜，但使愿无违。</p>
+</blockquote>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/06/14/Private_Weibo_based_on_Flask/" data-toggle="tooltip" data-placement="top" title="基于Flask搭建私人微博">
+                        Previous<br>
+                        <span>基于Flask搭建私人微博</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/07/04/Nine_Types_Oscillator/" data-toggle="tooltip" data-placement="top" title="振荡器九宫格">
+                        Next<br>
+                        <span>振荡器九宫格</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#MATLAB" title="MATLAB" rel="4">
+                                    MATLAB
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PLL" title="PLL" rel="11">
+                                    PLL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Programing" title="Programing" rel="4">
+                                    Programing
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Math" title="Math" rel="2">
+                                    Math
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Others" title="Others" rel="2">
+                                    Others
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Flask" title="Flask" rel="2">
+                                    Flask
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Training" title="Training" rel="2">
+                                    Training
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SerDes" title="SerDes" rel="2">
+                                    SerDes
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="#">(none)</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<!--
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+-->
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; MaZhaoxin's Blog 2024
+                    <br>
+					Powered by <a href="https://jekyllrb.com/" style="font-weight: bold">Jekyll</a> |
+					Themed by <a href="http://huangxuan.me" style="font-weight: bold">Hux</a> |
+					Hosted by <a href="https://pages.github.com/" style="font-weight: bold">GitHub Pages</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<!-- <script src="/js/jquery.min.js "></script> -->
+<script src="//cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- <script src="/js/bootstrap.min.js "></script> -->
+<script src="//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Jekyll Search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="Title / Date / Tags" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+</body>
+
+</html>

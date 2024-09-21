@@ -1,0 +1,252 @@
+{
+	"code" : 0 ,
+	"data" : [
+	 
+	{
+		"title" : "Flask App部署在子路径下的方法 - Programing_Flask",
+		"url" : "/2024/07/20/Flask_APP_in_sub_path/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "8b10b编码 - SerDes_ChatGPT",
+		"url" : "/2023/03/04/8b10b_Encoding/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "晶体振荡器 - XTAL_ChatGPT",
+		"url" : "/2023/03/03/XTAL_Oscillator/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "PLL脚本框架 - PLL",
+		"url" : "/2022/07/24/PLL_script_framework/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "markdown中的latex公式 - Programing",
+		"url" : "/2022/05/09/latex_in_markdown/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "相位噪声、抖动、EVM与眼图 - PLL",
+		"url" : "/2022/01/23/Phase_Noise_Jitter_EVM_and_Eye_Diagram/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "遗传算法 - Others",
+		"url" : "/2021/08/07/Genetic_Algorithm/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "可靠性与ESD介绍 - Training_ESD_Realibility",
+		"url" : "/2021/08/01/Reliability_and_ESD_Introduction/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "消费电子中SerDes的发展趋势和关键技术 - Training_SerDes",
+		"url" : "/2021/07/31/SerDes_Trends_and_Key_Technologes_In_Consumer_Electronics/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "振荡器九宫格 - PLL",
+		"url" : "/2021/07/04/Nine_Types_Oscillator/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "写在入职满8周年之际 - Life",
+		"url" : "/2021/06/24/For_work_8_years/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "基于Flask搭建私人微博 - Programing_Flask",
+		"url" : "/2021/06/14/Private_Weibo_based_on_Flask/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Win10配置及应用软件推荐 - Software",
+		"url" : "/2021/06/10/Win10_settings_and_apps/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "养老金测算 - Others",
+		"url" : "/2020/07/11/Pension_Calculation/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "从应用的角度说说傅立叶变换 - Math",
+		"url" : "/2020/01/09/About_FFT/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "数字滤波器的简单使用 - Filter",
+		"url" : "/2019/10/05/Brief_of_Digital_Filter/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "为什么增益裕度可以是负数 - Math",
+		"url" : "/2019/06/08/Why_Gain_Margin_Can_be_Negative/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "美化Cadence Library Manager - Cadence_Manager",
+		"url" : "/2019/01/09/Pretty_Cadence_Libmanager/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Jitter的基本知识 - PLL",
+		"url" : "/2018/10/20/Jitter_Basics/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "关于频率综合器 - PLL",
+		"url" : "/2018/08/12/About_Frequency_Synthesizer/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "基于Jekyll创建免费的静态博客站点 - Programing",
+		"url" : "/2018/08/04/Create_Free_Static_Blog_Base_On_Jekyll/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "关于IP Reuse - IC",
+		"url" : "/2018/04/18/About_IP_Reuse/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "SDM对分频器输出信号相位噪声的影响 - PLL",
+		"url" : "/2015/08/23/NDIV's_Phase_Noise_Due_To_SDM/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "LO Frequency Plan - PLL",
+		"url" : "/2015/08/16/LO_Frequency_Plan/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "在Simulink中创建自己的Library - MATLAB",
+		"url" : "/2015/08/09/Add_Custom_Library_In_Simulink/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "由相位噪声曲线计算积分相噪和Jitter的方法 - PLL",
+		"url" : "/2015/08/09/Calculate_IPN_Jitter_Based_On_Phase_Noise/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "理想倍频器/分频器对相噪/杂散的影响 - PLL",
+		"url" : "/2015/07/26/Ideal_Frequency_Multiplier_Divider's_Effect_On_Phase_Noise_and_Spur/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "PLL Simulink行为模型 - PLL_MATLAB",
+		"url" : "/2015/07/26/PLL_Simulink_Behavior_Model/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "PLL行为级仿真 - PLL",
+		"url" : "/2013/09/07/PLL_Behavior_Simulation/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Matlab根据相噪计算抖动 - MATLAB",
+		"url" : "/2013/09/07/Matlab_Calculate_Jitter_Based_On_Phase_Noise/"
+	}
+	
+	,
+	
+    
+	{
+		"title" : "Matlab符号运算 - MATLAB",
+		"url" : "/2013/09/07/Matlab_Symbolic_Toolbox/"
+	}
+	
+    
+	]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "MaZhaoxin's Blog",
+  "short_name": "MaZhaoxin's Blog",
+  "description": "这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.",
+  "icons": [{
+    "src": "icons/128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }, {
+    "src": "icons/512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#fff",
+  "theme_color": "#000",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="v0uNv3nx9jZLk-UxF0kPiGyotJ8tb-5YkP8IuUyUYsE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.
+">
+    <meta name="keywords"  content="马昭鑫, MaZhaoxin
+">
+    <meta name="theme-color" content="#000000">
+    
+    <title>马昭鑫的博客 | MaZhaoxin's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/page3/">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+  	<!-- <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+	<script src="//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">MaZhaoxin's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+					<li>
+						<a href="#" id="cb-search-btn">SEARCH</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>MaZhaoxin's Blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">Keep thinking, keep moving</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/2018/08/04/Create_Free_Static_Blog_Base_On_Jekyll/">
+        <h2 class="post-title">
+            基于Jekyll创建免费的静态博客站点
+        </h2>
+        
+        <div class="post-content-preview">
+            
+  Update @2021/01/01
+Coding.net经过屡次更新，已经不适合我这样的白嫖用户了。推荐使用github来搭建，步骤是类似的。
+
+
+
+  这篇算是交作业了。
+
+
+写在前面的话
+
+无意中在知乎看到了一个关于支持Markdown的博客平台的回答，结识了Jekyll。正好想更换博客平台，就查了些资料。
+
+在建站时参考了Jekyll搭建个人博客和如何搭建个人网站，又无意中看到...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on August 4, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2018/04/18/About_IP_Reuse/">
+        <h2 class="post-title">
+            关于IP Reuse
+        </h2>
+        
+        <div class="post-content-preview">
+            1. 为什么和什么（Why and What）
+
+在芯片的设计过程中，尤其是复杂的SoC芯片迭代设计中，经常需要根据产品定位增加或删减部分功能，如果把这些模块做好后打包放置于某处供其他项目调用，既可以节省开发成本、缩短开发周期，又可以充分验证电路，保证可靠性。
+
+有哪些IP适合这么做呢？BG、DCDC、LDO、ADC、DAC、PLL、XO、SerDes、Aux、TempSensor、Proc...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on April 18, 2018
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/08/23/NDIV's_Phase_Noise_Due_To_SDM/">
+        <h2 class="post-title">
+            SDM对分频器输出信号相位噪声的影响
+        </h2>
+        
+        <div class="post-content-preview">
+            SDM是PLL里很重要的一个噪声源，下面分析一下SDM对NDIV输出时钟相噪的影响。
+
+
+
+NDIV的输出
+
+首先，SDM输出信号的噪声是量化噪声的$\mathrm{sdm\_order}$次差分（具体推导暂且不提），而量化噪声是在$[-f_s/2 , +f_s/2]$范围内均匀分布，噪声功率为$\Delta^2/12$，差分的传函是$1-z^{-1}$，则有
+
+\[\begin{eqnar...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on August 23, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/08/16/LO_Frequency_Plan/">
+        <h2 class="post-title">
+            LO Frequency Plan
+        </h2>
+        
+        <div class="post-content-preview">
+            概述
+
+LO DIV是位于VCO和mixer之间的模块，其作用是分频和驱动长走线，设计难点在于底噪。
+
+
+不同的band有不同的频率覆盖范围，为了减小VCO的设计难度需要选择合适的分频方案。E-UTRA规定的band与频率的对应关系在3GPP或wikipedia上可以查到。
+
+
+一般来说，决定了所要支持的band、分频比步长、基本分频器、VCO的最高频率以及VCO的个数，最佳的LO分频方案就...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on August 16, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/08/09/Add_Custom_Library_In_Simulink/">
+        <h2 class="post-title">
+            在Simulink中创建自己的Library
+        </h2>
+        
+        <div class="post-content-preview">
+            前面说了一些常用的PLL行为模型，为了方便后续的调用，可以在simulink中创建个library进行管理。
+
+步骤如下：
+
+
+  
+    新建library。
+ 
+  
+  
+    把封装好的subsystem复制到新的library中，并保存。此时各模块的属性就是从browser中调用时的默认属性。
+ 
+  
+  在.mdl文件同目录下创建名为blkStruct.m的函数，内容如下所...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on August 9, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/08/09/Calculate_IPN_Jitter_Based_On_Phase_Noise/">
+        <h2 class="post-title">
+            由相位噪声曲线计算积分相噪和Jitter的方法
+        </h2>
+        
+        <div class="post-content-preview">
+            先放一张忘了从哪扒下来的图：
+
+
+  Update @20240509
+
+  Ref: https://www.analog.com/media/en/training-seminars/tutorials/MT-008.pdf
+
+
+基本思路：
+分段求积分相噪，相加得整体的积分相噪，进而得到以弧度为单位的相位抖动，最终转换为以时间为单位的Jitter。
+
+MATLAB代码：
+function...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on August 9, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/07/26/Ideal_Frequency_Multiplier_Divider's_Effect_On_Phase_Noise_and_Spur/">
+        <h2 class="post-title">
+            理想倍频器/分频器对相噪/杂散的影响
+        </h2>
+        
+        <div class="post-content-preview">
+            结论
+使用理想倍频器将信号频率提高 $N$ 倍，会让相噪抬高$20log_{10}(N)$dB，类似的$N$分频会让相噪降低$20log_{10}(N)$dB。
+
+理想倍频器
+对于信号 $f(t) = cos(\omega t + \phi(t))$，倍频器的功能是把$cos$函数的参数（相位）增大$N$倍，即任何相位域的噪声都会放大$N$倍，即相位噪声抬高$20log_{10}(N)$dB...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on July 26, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/07/26/PLL_Simulink_Behavior_Model/">
+        <h2 class="post-title">
+            PLL Simulink行为模型
+        </h2>
+        
+        <div class="post-content-preview">
+            VCO
+根据配置的参数计算当前的频率，然后进行循环积分，然后转成方波输出。
+
+
+NDIV
+主要由两个triggered subsysterm组成，分别是prescaler和PSC，注意由于存在收敛性问题，需要把input的Latch input by delaying outside signal选项勾上。
+
+
+SDM
+对于这种本身就是数字时序电路的模块来说，最简单的办法就是直接用trigg...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on July 26, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2013/09/07/PLL_Behavior_Simulation/">
+        <h2 class="post-title">
+            PLL行为级仿真
+        </h2>
+        
+        <div class="post-content-preview">
+            一、MatlabSimulink
+
+PhaseLocked Loop tutorial
+
+http://www.mathworks.com/matlabcentral/fileexchange/14868-phase-locked-loop-tutorial/
+
+包括PFD&amp;CP PLL、线性PLL、数字PLL等若干模型
+
+PhaseLocked Loop Synthesis and...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on September 7, 2013
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2013/09/07/Matlab_Calculate_Jitter_Based_On_Phase_Noise/">
+        <h2 class="post-title">
+            Matlab根据相噪计算抖动
+        </h2>
+        
+        <div class="post-content-preview">
+            来源：http://www.mathworks.cn/matlabcentral/fileexchange/22038-phase-noise-to-jitter/content/Pn2Jitter.m
+
+function Jitter = Pn2Jitter(f, Lf, fc)
+%
+% Summary: Jitter (RMS) calculation from phase noise ...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by MaZhaoxin on September 7, 2013
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page2">&larr; Newer Posts</a>
+    </li>
+    
+    
+    <li class="next">
+        <a href="/page4">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                                <a href="/tags/#MATLAB" title="MATLAB" rel="4">
+                                    MATLAB
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#PLL" title="PLL" rel="11">
+                                    PLL
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Programing" title="Programing" rel="4">
+                                    Programing
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Math" title="Math" rel="2">
+                                    Math
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Others" title="Others" rel="2">
+                                    Others
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Flask" title="Flask" rel="2">
+                                    Flask
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Training" title="Training" rel="2">
+                                    Training
+                                </a>
+                            
+                        
+                            
+                                <a href="/tags/#SerDes" title="SerDes" rel="2">
+                                    SerDes
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <img src="/img/avatar.jpg" />
+                        
+                        
+                            <p>每天起床<br/>打开眼睛<br/>也打开笑容<br/>这一天里<br/>还有什么事情可以难倒你呢<br/>:)</p>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="http://weibo.com/(none)">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://github.com/(none)">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </section>
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="#">(none)</a></li>
+                    
+                </ul>
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; MaZhaoxin's Blog 2024
+                    <br>
+					Powered by <a href="https://jekyllrb.com/" style="font-weight: bold">Jekyll</a> |
+					Themed by <a href="http://huangxuan.me" style="font-weight: bold">Hux</a> |
+					Hosted by <a href="https://pages.github.com/" style="font-weight: bold">GitHub Pages</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<!-- <script src="/js/jquery.min.js "></script> -->
+<script src="//cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- <script src="/js/bootstrap.min.js "></script> -->
+<script src="//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Jekyll Search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="Title / Date / Tags" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+</body>
+
+</html>

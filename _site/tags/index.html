@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="v0uNv3nx9jZLk-UxF0kPiGyotJ8tb-5YkP8IuUyUYsE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.
+">
+    <meta name="keywords"  content="马昭鑫, MaZhaoxin
+">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Tags - 马昭鑫的博客 | MaZhaoxin's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/tags/">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+  	<!-- <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+	<script src="//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">MaZhaoxin's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+					<li>
+						<a href="#" id="cb-search-btn">SEARCH</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/tag-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading" id="tag-heading">
+                    <h1>Tags</h1>
+                    <span class="subheading">聚沙成塔</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 标签云 -->
+			<div id='tag_cloud' class="tags">
+				
+				<a href="#MATLAB" title="MATLAB" rel="4">MATLAB</a>
+				
+				<a href="#PLL" title="PLL" rel="11">PLL</a>
+				
+				<a href="#IC" title="IC" rel="1">IC</a>
+				
+				<a href="#Programing" title="Programing" rel="4">Programing</a>
+				
+				<a href="#Cadence" title="Cadence" rel="1">Cadence</a>
+				
+				<a href="#Manager" title="Manager" rel="1">Manager</a>
+				
+				<a href="#Math" title="Math" rel="2">Math</a>
+				
+				<a href="#Filter" title="Filter" rel="1">Filter</a>
+				
+				<a href="#Others" title="Others" rel="2">Others</a>
+				
+				<a href="#Software" title="Software" rel="1">Software</a>
+				
+				<a href="#Flask" title="Flask" rel="2">Flask</a>
+				
+				<a href="#Life" title="Life" rel="1">Life</a>
+				
+				<a href="#Training" title="Training" rel="2">Training</a>
+				
+				<a href="#SerDes" title="SerDes" rel="2">SerDes</a>
+				
+				<a href="#ESD" title="ESD" rel="1">ESD</a>
+				
+				<a href="#Realibility" title="Realibility" rel="1">Realibility</a>
+				
+				<a href="#XTAL" title="XTAL" rel="1">XTAL</a>
+				
+				<a href="#ChatGPT" title="ChatGPT" rel="2">ChatGPT</a>
+				
+			</div>
+
+            <!--<blockquote class="tag-comments">
+                标签命名规范：
+                    <li>行业观察、职位、公司优先使用中文</li>
+                    <li>外国产品、术语优先使用英文</li>
+            </blockquote>-->
+
+            <!-- 标签列表 -->
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="MATLAB">
+                    <span class="tag-text">MATLAB</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2015-08-09">2015-08-09</time>
+				  <a href="/2015/08/09/Add_Custom_Library_In_Simulink/" title="在Simulink中创建自己的Library">在Simulink中创建自己的Library</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2015/08/09/Add_Custom_Library_In_Simulink/">
+				        <h2 class="post-title">
+                            在Simulink中创建自己的Library
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2015-08-09</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2015-07-26">2015-07-26</time>
+				  <a href="/2015/07/26/PLL_Simulink_Behavior_Model/" title="PLL Simulink行为模型">PLL Simulink行为模型</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2015/07/26/PLL_Simulink_Behavior_Model/">
+				        <h2 class="post-title">
+                            PLL Simulink行为模型
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2015-07-26</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2013-09-07">2013-09-07</time>
+				  <a href="/2013/09/07/Matlab_Calculate_Jitter_Based_On_Phase_Noise/" title="Matlab根据相噪计算抖动">Matlab根据相噪计算抖动</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2013/09/07/Matlab_Calculate_Jitter_Based_On_Phase_Noise/">
+				        <h2 class="post-title">
+                            Matlab根据相噪计算抖动
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2013-09-07</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2013-09-07">2013-09-07</time>
+				  <a href="/2013/09/07/Matlab_Symbolic_Toolbox/" title="Matlab符号运算">Matlab符号运算</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2013/09/07/Matlab_Symbolic_Toolbox/">
+				        <h2 class="post-title">
+                            Matlab符号运算
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2013-09-07</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="PLL">
+                    <span class="tag-text">PLL</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2022-07-24">2022-07-24</time>
+				  <a href="/2022/07/24/PLL_script_framework/" title="PLL脚本框架">PLL脚本框架</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2022/07/24/PLL_script_framework/">
+				        <h2 class="post-title">
+                            PLL脚本框架
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2022-07-24</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2022-01-23">2022-01-23</time>
+				  <a href="/2022/01/23/Phase_Noise_Jitter_EVM_and_Eye_Diagram/" title="相位噪声、抖动、EVM与眼图">相位噪声、抖动、EVM与眼图</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2022/01/23/Phase_Noise_Jitter_EVM_and_Eye_Diagram/">
+				        <h2 class="post-title">
+                            相位噪声、抖动、EVM与眼图
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2022-01-23</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-07-04">2021-07-04</time>
+				  <a href="/2021/07/04/Nine_Types_Oscillator/" title="振荡器九宫格">振荡器九宫格</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/07/04/Nine_Types_Oscillator/">
+				        <h2 class="post-title">
+                            振荡器九宫格
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-07-04</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-10-20">2018-10-20</time>
+				  <a href="/2018/10/20/Jitter_Basics/" title="Jitter的基本知识">Jitter的基本知识</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/10/20/Jitter_Basics/">
+				        <h2 class="post-title">
+                            Jitter的基本知识
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-10-20</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-08-12">2018-08-12</time>
+				  <a href="/2018/08/12/About_Frequency_Synthesizer/" title="关于频率综合器">关于频率综合器</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/08/12/About_Frequency_Synthesizer/">
+				        <h2 class="post-title">
+                            关于频率综合器
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-08-12</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2015-08-23">2015-08-23</time>
+				  <a href="/2015/08/23/NDIV's_Phase_Noise_Due_To_SDM/" title="SDM对分频器输出信号相位噪声的影响">SDM对分频器输出信号相位噪声的影响</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2015/08/23/NDIV's_Phase_Noise_Due_To_SDM/">
+				        <h2 class="post-title">
+                            SDM对分频器输出信号相位噪声的影响
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2015-08-23</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2015-08-16">2015-08-16</time>
+				  <a href="/2015/08/16/LO_Frequency_Plan/" title="LO Frequency Plan">LO Frequency Plan</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2015/08/16/LO_Frequency_Plan/">
+				        <h2 class="post-title">
+                            LO Frequency Plan
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2015-08-16</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2015-08-09">2015-08-09</time>
+				  <a href="/2015/08/09/Calculate_IPN_Jitter_Based_On_Phase_Noise/" title="由相位噪声曲线计算积分相噪和Jitter的方法">由相位噪声曲线计算积分相噪和Jitter的方法</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2015/08/09/Calculate_IPN_Jitter_Based_On_Phase_Noise/">
+				        <h2 class="post-title">
+                            由相位噪声曲线计算积分相噪和Jitter的方法
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2015-08-09</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2015-07-26">2015-07-26</time>
+				  <a href="/2015/07/26/Ideal_Frequency_Multiplier_Divider's_Effect_On_Phase_Noise_and_Spur/" title="理想倍频器/分频器对相噪/杂散的影响">理想倍频器/分频器对相噪/杂散的影响</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2015/07/26/Ideal_Frequency_Multiplier_Divider's_Effect_On_Phase_Noise_and_Spur/">
+				        <h2 class="post-title">
+                            理想倍频器/分频器对相噪/杂散的影响
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2015-07-26</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2015-07-26">2015-07-26</time>
+				  <a href="/2015/07/26/PLL_Simulink_Behavior_Model/" title="PLL Simulink行为模型">PLL Simulink行为模型</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2015/07/26/PLL_Simulink_Behavior_Model/">
+				        <h2 class="post-title">
+                            PLL Simulink行为模型
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2015-07-26</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2013-09-07">2013-09-07</time>
+				  <a href="/2013/09/07/PLL_Behavior_Simulation/" title="PLL行为级仿真">PLL行为级仿真</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2013/09/07/PLL_Behavior_Simulation/">
+				        <h2 class="post-title">
+                            PLL行为级仿真
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2013-09-07</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="IC">
+                    <span class="tag-text">IC</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-04-18">2018-04-18</time>
+				  <a href="/2018/04/18/About_IP_Reuse/" title="关于IP Reuse">关于IP Reuse</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/04/18/About_IP_Reuse/">
+				        <h2 class="post-title">
+                            关于IP Reuse
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-04-18</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Programing">
+                    <span class="tag-text">Programing</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2024-07-20">2024-07-20</time>
+				  <a href="/2024/07/20/Flask_APP_in_sub_path/" title="Flask App部署在子路径下的方法">Flask App部署在子路径下的方法</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2024/07/20/Flask_APP_in_sub_path/">
+				        <h2 class="post-title">
+                            Flask App部署在子路径下的方法
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2024-07-20</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2022-05-09">2022-05-09</time>
+				  <a href="/2022/05/09/latex_in_markdown/" title="markdown中的latex公式">markdown中的latex公式</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2022/05/09/latex_in_markdown/">
+				        <h2 class="post-title">
+                            markdown中的latex公式
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2022-05-09</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-06-14">2021-06-14</time>
+				  <a href="/2021/06/14/Private_Weibo_based_on_Flask/" title="基于Flask搭建私人微博">基于Flask搭建私人微博</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/06/14/Private_Weibo_based_on_Flask/">
+				        <h2 class="post-title">
+                            基于Flask搭建私人微博
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-06-14</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2018-08-04">2018-08-04</time>
+				  <a href="/2018/08/04/Create_Free_Static_Blog_Base_On_Jekyll/" title="基于Jekyll创建免费的静态博客站点">基于Jekyll创建免费的静态博客站点</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2018/08/04/Create_Free_Static_Blog_Base_On_Jekyll/">
+				        <h2 class="post-title">
+                            基于Jekyll创建免费的静态博客站点
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2018-08-04</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Cadence">
+                    <span class="tag-text">Cadence</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-01-09">2019-01-09</time>
+				  <a href="/2019/01/09/Pretty_Cadence_Libmanager/" title="美化Cadence Library Manager">美化Cadence Library Manager</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/01/09/Pretty_Cadence_Libmanager/">
+				        <h2 class="post-title">
+                            美化Cadence Library Manager
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-01-09</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Manager">
+                    <span class="tag-text">Manager</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-01-09">2019-01-09</time>
+				  <a href="/2019/01/09/Pretty_Cadence_Libmanager/" title="美化Cadence Library Manager">美化Cadence Library Manager</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/01/09/Pretty_Cadence_Libmanager/">
+				        <h2 class="post-title">
+                            美化Cadence Library Manager
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-01-09</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Math">
+                    <span class="tag-text">Math</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-01-09">2020-01-09</time>
+				  <a href="/2020/01/09/About_FFT/" title="从应用的角度说说傅立叶变换">从应用的角度说说傅立叶变换</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/01/09/About_FFT/">
+				        <h2 class="post-title">
+                            从应用的角度说说傅立叶变换
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-01-09</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-06-08">2019-06-08</time>
+				  <a href="/2019/06/08/Why_Gain_Margin_Can_be_Negative/" title="为什么增益裕度可以是负数">为什么增益裕度可以是负数</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/06/08/Why_Gain_Margin_Can_be_Negative/">
+				        <h2 class="post-title">
+                            为什么增益裕度可以是负数
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-06-08</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Filter">
+                    <span class="tag-text">Filter</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2019-10-05">2019-10-05</time>
+				  <a href="/2019/10/05/Brief_of_Digital_Filter/" title="数字滤波器的简单使用">数字滤波器的简单使用</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2019/10/05/Brief_of_Digital_Filter/">
+				        <h2 class="post-title">
+                            数字滤波器的简单使用
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2019-10-05</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Others">
+                    <span class="tag-text">Others</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-08-07">2021-08-07</time>
+				  <a href="/2021/08/07/Genetic_Algorithm/" title="遗传算法">遗传算法</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/08/07/Genetic_Algorithm/">
+				        <h2 class="post-title">
+                            遗传算法
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-08-07</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2020-07-11">2020-07-11</time>
+				  <a href="/2020/07/11/Pension_Calculation/" title="养老金测算">养老金测算</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2020/07/11/Pension_Calculation/">
+				        <h2 class="post-title">
+                            养老金测算
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2020-07-11</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Software">
+                    <span class="tag-text">Software</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-06-10">2021-06-10</time>
+				  <a href="/2021/06/10/Win10_settings_and_apps/" title="Win10配置及应用软件推荐">Win10配置及应用软件推荐</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/06/10/Win10_settings_and_apps/">
+				        <h2 class="post-title">
+                            Win10配置及应用软件推荐
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-06-10</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Flask">
+                    <span class="tag-text">Flask</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2024-07-20">2024-07-20</time>
+				  <a href="/2024/07/20/Flask_APP_in_sub_path/" title="Flask App部署在子路径下的方法">Flask App部署在子路径下的方法</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2024/07/20/Flask_APP_in_sub_path/">
+				        <h2 class="post-title">
+                            Flask App部署在子路径下的方法
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2024-07-20</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-06-14">2021-06-14</time>
+				  <a href="/2021/06/14/Private_Weibo_based_on_Flask/" title="基于Flask搭建私人微博">基于Flask搭建私人微博</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/06/14/Private_Weibo_based_on_Flask/">
+				        <h2 class="post-title">
+                            基于Flask搭建私人微博
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-06-14</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Life">
+                    <span class="tag-text">Life</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-06-24">2021-06-24</time>
+				  <a href="/2021/06/24/For_work_8_years/" title="写在入职满8周年之际">写在入职满8周年之际</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/06/24/For_work_8_years/">
+				        <h2 class="post-title">
+                            写在入职满8周年之际
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-06-24</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Training">
+                    <span class="tag-text">Training</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-08-01">2021-08-01</time>
+				  <a href="/2021/08/01/Reliability_and_ESD_Introduction/" title="可靠性与ESD介绍">可靠性与ESD介绍</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/08/01/Reliability_and_ESD_Introduction/">
+				        <h2 class="post-title">
+                            可靠性与ESD介绍
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-08-01</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-07-31">2021-07-31</time>
+				  <a href="/2021/07/31/SerDes_Trends_and_Key_Technologes_In_Consumer_Electronics/" title="消费电子中SerDes的发展趋势和关键技术">消费电子中SerDes的发展趋势和关键技术</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/07/31/SerDes_Trends_and_Key_Technologes_In_Consumer_Electronics/">
+				        <h2 class="post-title">
+                            消费电子中SerDes的发展趋势和关键技术
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-07-31</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="SerDes">
+                    <span class="tag-text">SerDes</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2023-03-04">2023-03-04</time>
+				  <a href="/2023/03/04/8b10b_Encoding/" title="8b10b编码">8b10b编码</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2023/03/04/8b10b_Encoding/">
+				        <h2 class="post-title">
+                            8b10b编码
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2023-03-04</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-07-31">2021-07-31</time>
+				  <a href="/2021/07/31/SerDes_Trends_and_Key_Technologes_In_Consumer_Electronics/" title="消费电子中SerDes的发展趋势和关键技术">消费电子中SerDes的发展趋势和关键技术</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/07/31/SerDes_Trends_and_Key_Technologes_In_Consumer_Electronics/">
+				        <h2 class="post-title">
+                            消费电子中SerDes的发展趋势和关键技术
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-07-31</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="ESD">
+                    <span class="tag-text">ESD</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-08-01">2021-08-01</time>
+				  <a href="/2021/08/01/Reliability_and_ESD_Introduction/" title="可靠性与ESD介绍">可靠性与ESD介绍</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/08/01/Reliability_and_ESD_Introduction/">
+				        <h2 class="post-title">
+                            可靠性与ESD介绍
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-08-01</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="Realibility">
+                    <span class="tag-text">Realibility</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2021-08-01">2021-08-01</time>
+				  <a href="/2021/08/01/Reliability_and_ESD_Introduction/" title="可靠性与ESD介绍">可靠性与ESD介绍</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2021/08/01/Reliability_and_ESD_Introduction/">
+				        <h2 class="post-title">
+                            可靠性与ESD介绍
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2021-08-01</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="XTAL">
+                    <span class="tag-text">XTAL</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2023-03-03">2023-03-03</time>
+				  <a href="/2023/03/03/XTAL_Oscillator/" title="晶体振荡器">晶体振荡器</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2023/03/03/XTAL_Oscillator/">
+				        <h2 class="post-title">
+                            晶体振荡器
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2023-03-03</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+			<div class="one-tag-list">
+			  	<span class="fa fa-tag listing-seperator" id="ChatGPT">
+                    <span class="tag-text">ChatGPT</span>
+                </span>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2023-03-04">2023-03-04</time>
+				  <a href="/2023/03/04/8b10b_Encoding/" title="8b10b编码">8b10b编码</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2023/03/04/8b10b_Encoding/">
+				        <h2 class="post-title">
+                            8b10b编码
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2023-03-04</p> -->
+				</div>
+				<hr>
+				
+				  <!-- <li class="listing-item">
+				  <time datetime="2023-03-03">2023-03-03</time>
+				  <a href="/2023/03/03/XTAL_Oscillator/" title="晶体振荡器">晶体振荡器</a>
+				  </li> -->
+				 <div class="post-preview">
+				    <a href="/2023/03/03/XTAL_Oscillator/">
+				        <h2 class="post-title">
+                            晶体振荡器
+				        </h2>
+				        
+				    </a>
+				    <!-- <p class="post-meta">2023-03-03</p> -->
+				</div>
+				<hr>
+				
+			</div>
+			
+
+		</div>
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; MaZhaoxin's Blog 2024
+                    <br>
+					Powered by <a href="https://jekyllrb.com/" style="font-weight: bold">Jekyll</a> |
+					Themed by <a href="http://huangxuan.me" style="font-weight: bold">Hux</a> |
+					Hosted by <a href="https://pages.github.com/" style="font-weight: bold">GitHub Pages</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<!-- <script src="/js/jquery.min.js "></script> -->
+<script src="//cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- <script src="/js/bootstrap.min.js "></script> -->
+<script src="//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Jekyll Search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="Title / Date / Tags" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+</body>
+
+</html>

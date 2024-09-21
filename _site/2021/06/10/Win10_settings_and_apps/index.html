@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="v0uNv3nx9jZLk-UxF0kPiGyotJ8tb-5YkP8IuUyUYsE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.
+">
+    <meta name="keywords"  content="马昭鑫, MaZhaoxin
+">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Win10配置及应用软件推荐 - 马昭鑫的博客 | MaZhaoxin's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2021/06/10/Win10_settings_and_apps/">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+  	<!-- <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+	<script src="//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">MaZhaoxin's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+					<li>
+						<a href="#" id="cb-search-btn">SEARCH</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/bg-post/manager.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Software" title="Software">Software</a>
+                        
+                    </div>
+                    <h1>Win10配置及应用软件推荐</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by MaZhaoxin on June 10, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="前言">前言</h1>
+<p>这周IT换掉了从进公司就配给我的办公电脑（据说是2015年出品的），工作体验一下子顺滑了好多，心情也跟着舒畅了起来。之前的电脑配置其实也不差，但是自从IT给装了Digital Guardian公司的内控软件，8GB的内存分分钟被占满，硬盘一直嘎吱吱地读写个不停，甚至连打开个文件夹都会出现资源管理器崩溃的现象，着实影响情绪。新电脑的内存一下跳到了32GB，有种“鸟枪换炮”的感觉，现在操作起来丝滑无比（当然也可能是新系统、新硬件的缘故）。新系统自然要配置一番，我便把常用的软件和配置在此记录下来。</p>
+
+<h1 id="系统设置">系统设置</h1>
+<p>Win10的一些默认设置不太符合我的习惯，调教如下：</p>
+<ul>
+  <li>隐藏状态栏的搜索框。这个框太过于占地方，平时用到的机会也不多，即使需要用也可以按<code class="language-plaintext highlighter-rouge">win</code>键后直接输入。</li>
+  <li>把状态栏的合并改为“从不”。我喜欢经典的宽状态栏按钮，不管是看还是点都要方便一些，但是牺牲了同时关闭一组程序的功能。</li>
+  <li>去掉默认固定在状态栏的程序。</li>
+  <li>固定常用程序到状态栏。如Outlook、Firefox啥的。</li>
+  <li>去掉默认固定在开始菜单的程序。</li>
+  <li>固定常用程序到开始菜单。如画图、计算器、NPP等。</li>
+  <li>设置文档、下载、桌面的库路径到D盘。可以免去万一需要重装系统丢失资料的烦恼，也可以避免桌面堆放太多东西或者下载太多东西后占用系统盘空间的问题。</li>
+  <li>卸载oneNote UWP版。我喜欢oneNote，但是不喜欢UWP版，更不喜欢一台电脑装两个同样功能的软件，以免混淆卸载了事。</li>
+  <li>去除右键菜单里乱七八糟的选项。这里需要借用<a href="http://www.nirsoft.net/utils/shell_menu_view.html">ShellMenuView</a> 和<a href="http://www.nirsoft.net/utils/shexview.html">ShellExView</a> 工具。WinRar的部分可以在其选项中设置为级联菜单。</li>
+  <li>更换主题、壁纸等，清理、排布桌面图标等。</li>
+</ul>
+
+<h1 id="输入法">输入法</h1>
+<p>Win10自带的输入法已经足够好用，不需要再安装其他的输入法。毕竟输入法有泄露隐私的风险，某些输入法还会搞弹广告、诱导下载全家桶之类的小动作。</p>
+
+<h1 id="浏览器">浏览器</h1>
+<p>Win10已经自带了IE和EDGE两款浏览器，IT又默认安装了Chrome（公司的电子流只支持Chrome…），但我仍然推荐Firefox。因为Firefox是一款开源软件，是目前除了Safari以外仅剩的对抗Chrome内核的现代浏览器了。</p>
+<blockquote>
+  <p>切记不要去firefox.com.cn下载！最好去<a href="http://ftp.mozilla.org/pub/firefox/releases/">Mozilla FTP</a> 下载需要的版本。</p>
+</blockquote>
+
+<h1 id="截屏工具">截屏工具</h1>
+<p>推荐<a href="https://www.snipaste.com/">Snipaste</a> 。这是一款小巧而又功能强大的免费软件，支持自动检测区域、精确调整范围、涂鸦标注、马赛克、屏幕贴图等。</p>
+
+<h1 id="文本编辑器">文本编辑器</h1>
+
+<h2 id="纯文本编辑器">纯文本编辑器</h2>
+<p>Win10自带的notepad功能太过简陋，推荐<a href="https://notepad-plus-plus.org/">notepad++（NPP）</a> 。这是一款开源软件，不仅功能强大（支持Linux换行格式、块选择、语法高亮、正则表达式查找替换、选中高亮相同文本等），而且启动迅速，支持快速打开大文件。另外支持安装插件，可以通过插件实现文件内容比较等功能。</p>
+<blockquote>
+  <p>NPP的作者是有点政治问题，但不影响这是一款非常好用的工具啊。</p>
+</blockquote>
+
+<h2 id="markdown编辑器">Markdown编辑器</h2>
+<p>用Markdown写作会比Word更容易把注意力集中在内容上，虽然NPP加插件也可以实现实时预览，但效果不如<a href="https://typora.io/">Typora</a> 。这同样是一款免费软件，支持Markdown同窗口实时预览，支持公式、表格等复杂功能，还支持直接粘贴图片另存为assets等。</p>
+
+<h2 id="笔记软件">笔记软件</h2>
+<p>oneNote是Office套件中的，不需要另外安装。我已经用了十年时间，颇为顺手。其优点便是支持搜索图片内的文字（自带OCR）、支持表达式求值、无广告、不用担心泄露信息等，缺点是会出现中英文字体混乱问题、不支持Markdown语法。</p>
+
+<h1 id="框图绘制软件">框图绘制软件</h1>
+<p>因为Visio需要另外购买，所以我推荐其替代品——<a href="https://github.com/jgraph/drawio-desktop/releases/tag/v14.6.13">draw.io</a> 。这是一款开源软件，虽然功能不如Visio，但胜在免费，且基本可以满足一般需求。</p>
+
+<h1 id="科学计算">科学计算</h1>
+<p>Matlab的费用之高，公司是不可能提供到人手一套的，推荐其替代品——<a href="https://www.gnu.org/software/octave/">Octave</a> 。这也是开源软件，兼容Matlab语法，通过<code class="language-plaintext highlighter-rouge">pkg</code>语句导入工具包后可以满足基本需求（除了Simulink）。其缺点是虽然哪都能用，但是哪哪都不好用，不过考虑到是免费的，这个缺点也就可以忍受了。
+另外，也可以试试<a href="https://www.anaconda.com/products/individual">Anaconda</a>，这是基于Python的科学计算软件。</p>
+
+<h1 id="编程">编程</h1>
+
+<p>因为有时候需要写点小东西帮我处理一些繁琐的事情（如从FT log中筛选数据等），所以会安装编程环境。</p>
+
+<h2 id="脚本环境">脚本环境</h2>
+<p><a href="https://www.python.org/downloads/">Python</a> 是目前比较热的编程语言，胜在语法简单、清晰，库众多而全面，可以很方便的实现各种功能。</p>
+
+<p>另外由于其也可以进行科学计算和绘制图表，在处理仿真数据方面也很好用（Linux发行版一般默认安装了Python）。</p>
+
+<h2 id="windows小工具开发">Windows小工具开发</h2>
+<p>Python的缺点是不便于分发，毕竟目标机器不一定安装了Python环境（尤其是实验室那种不能上网、没有管理员权限的电脑）。因此对于在Windows平台的小工具（尤其是图形化界面的小工具），我更倾向于使用C#在.Net Framework写winform或WPF程序。推荐<a href="https://sourceforge.net/projects/sharpdevelop/">SharpDevelop</a> ，虽然它早在5年前便停止更新了，而且Visual Studio系列的功能更加强大，但考虑到它的安装包只有13MB，也包含了GUI Designer，就非常适合我这种“少、小”的开发需求。</p>
+
+<blockquote>
+  <p>Excel+VBA也是个选择，不过VB语法太过于老旧，VBA编辑器又实在是难用……</p>
+</blockquote>
+
+<h1 id="总结">总结</h1>
+
+<p>总结一下上述应用软件。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>应用程序</th>
+      <th>价格</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>输入法</td>
+      <td>微软拼音输入法</td>
+      <td>(Win10自带)</td>
+    </tr>
+    <tr>
+      <td>浏览器</td>
+      <td>Firefox</td>
+      <td>开源、免费</td>
+    </tr>
+    <tr>
+      <td>截屏工具</td>
+      <td>Snipaste</td>
+      <td>免费</td>
+    </tr>
+    <tr>
+      <td>纯文本编辑器</td>
+      <td>Notepad++</td>
+      <td>开源、免费</td>
+    </tr>
+    <tr>
+      <td>Markdown编辑器</td>
+      <td>Typora</td>
+      <td>免费</td>
+    </tr>
+    <tr>
+      <td>笔记软件</td>
+      <td>oneNote</td>
+      <td>(Office自带)</td>
+    </tr>
+    <tr>
+      <td>框图绘制软件</td>
+      <td>draw.io</td>
+      <td>开源、免费</td>
+    </tr>
+    <tr>
+      <td>科学计算</td>
+      <td>Octave</td>
+      <td>开源、免费</td>
+    </tr>
+    <tr>
+      <td>脚本环境</td>
+      <td>Python</td>
+      <td>开源、免费</td>
+    </tr>
+    <tr>
+      <td>Windows小工具开发</td>
+      <td>SharpDevelop</td>
+      <td>开源、免费</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>最后感慨一下：</p>
+
+  <ul>
+    <li>我上大学时（2006年）和舍友集资买了台二手台式机电脑，赛扬处理器+512MB内存+40GB硬盘，居然还有3.5英寸软驱；</li>
+    <li>在2007年买的笔记本（联想昭阳E42），1GB内存+100GB硬盘，居然有15针串口和IEEE1394接口（又叫“火线”，当年是USB的强力对手）。在后来又加了1GB内存、USB无线网卡、SSD硬盘，续命到现在，但是如果不特殊处理连HTTPS协议的网站都打不开（参考<a href="https://zhuanlan.zhihu.com/p/161273904">指南：在 2020 年使用 Windows XP - 知乎</a>） 。</li>
+    <li>再后来在2012年买了华硕的一款笔记本，4GB内存+AMD处理器+双显卡，绚丽又稳定的Win7系统。</li>
+    <li>恍然间到了现在，手机的内存到了12GB，电脑的内存到了32GB，USB统一了天下（连耳机、显示器都可以用USB type-C连接）。然而Win10修修补补依然界面不统一、bug不断，Linux依然是小众的桌面操作系统。Chrome成了新时代的IE，千千静听等一众小而美的应用走进了坟墓，同样死掉或者半死不活的还有网易博客、人人网、猫扑网、高校论坛……。各种应用程序也越来越放飞自我，一个聊天工具能占上GB的内存，浏览器套壳的应用（说的就是你——网易云音乐）越来越流行。</li>
+    <li>“这是最好的时代，这是最坏的时代”。</li>
+  </ul>
+</blockquote>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/07/11/Pension_Calculation/" data-toggle="tooltip" data-placement="top" title="养老金测算">
+                        Previous<br>
+                        <span>养老金测算</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/06/14/Private_Weibo_based_on_Flask/" data-toggle="tooltip" data-placement="top" title="基于Flask搭建私人微博">
+                        Next<br>
+                        <span>基于Flask搭建私人微博</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#MATLAB" title="MATLAB" rel="4">
+                                    MATLAB
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PLL" title="PLL" rel="11">
+                                    PLL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Programing" title="Programing" rel="4">
+                                    Programing
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Math" title="Math" rel="2">
+                                    Math
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Others" title="Others" rel="2">
+                                    Others
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Flask" title="Flask" rel="2">
+                                    Flask
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Training" title="Training" rel="2">
+                                    Training
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SerDes" title="SerDes" rel="2">
+                                    SerDes
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="#">(none)</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<!--
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+-->
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; MaZhaoxin's Blog 2024
+                    <br>
+					Powered by <a href="https://jekyllrb.com/" style="font-weight: bold">Jekyll</a> |
+					Themed by <a href="http://huangxuan.me" style="font-weight: bold">Hux</a> |
+					Hosted by <a href="https://pages.github.com/" style="font-weight: bold">GitHub Pages</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<!-- <script src="/js/jquery.min.js "></script> -->
+<script src="//cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- <script src="/js/bootstrap.min.js "></script> -->
+<script src="//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Jekyll Search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="Title / Date / Tags" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+</body>
+
+</html>

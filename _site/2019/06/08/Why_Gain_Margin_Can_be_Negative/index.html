@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="v0uNv3nx9jZLk-UxF0kPiGyotJ8tb-5YkP8IuUyUYsE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.
+">
+    <meta name="keywords"  content="马昭鑫, MaZhaoxin
+">
+    <meta name="theme-color" content="#000000">
+    
+    <title>为什么增益裕度可以是负数 - 马昭鑫的博客 | MaZhaoxin's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2019/06/08/Why_Gain_Margin_Can_be_Negative/">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+  	<!-- <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+	<script src="//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">MaZhaoxin's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+					<li>
+						<a href="#" id="cb-search-btn">SEARCH</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/bg-post/thinking.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Math" title="Math">Math</a>
+                        
+                    </div>
+                    <h1>为什么增益裕度可以是负数</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by MaZhaoxin on June 8, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="引子">引子</h1>
+
+<p>可能很多人都有过一个疑问，对于type-II PLL的传递函数（其波特图如下所示）而言，在DC处相移是180度，且开环增益远大于0dB，为什么还可以保持稳定呢？</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Bode_PLL_OL.png" alt="Bode_PLL_OL" /></p>
+
+<p>如果说上例中DC处的180度相移是无限接近的话，在有温度补偿环路的PLL中（其频响曲线如下图所示），相频曲线明明白白地在增益大于0dB的位置穿过了180度，为什么还是能稳定呢？</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Bode_PLL_OL_wTempCal.png" alt="Bode_PLL_OL_wTempCal" /></p>
+
+<p>或者换句话说，<strong>如果一个系统的相位裕度为正，但增益裕度为负，那么这个系统是稳定的吗？如果可以，增益裕度的意义是什么？</strong></p>
+
+<h1 id="稳定性判据">稳定性判据</h1>
+
+<h2 id="基本概念">基本概念</h2>
+
+<p>我们知道，线性时不变（LTI）系统均有对应的单位冲激响应$h(t)$，其拉普拉斯变换$H(s)$被称为系统函数或系统的传递函数。$H(s)$可以写成分子多项式比上分母多项式的形式（且分母的多项式阶数不小于分子多项式的阶数），分子多项式的根被称为零点，分母多项式的根被称为极点。</p>
+
+<p>判断系统是否稳定的依据是观察系统的极点是否全部在复平面的左半平面。至于原因可参考：<a href="https://www.zhihu.com/question/41901406/answer/92764660">根轨迹极点在右边为什么不稳定？ -知乎</a>，简单整理如下：</p>
+
+<blockquote>
+  <p>对LTI系统来说，<code class="language-plaintext highlighter-rouge">系统稳定</code>的定义为<code class="language-plaintext highlighter-rouge">有限的输入对应有限的输出</code>。而输出是输入和单位冲激响应的卷积：$y(x)=x(t)*h(t)$，那么就要求单位冲激响应$h(t)$是绝对可积的，也就是要求$h(t)$的傅立叶变换——系统的频率响应$H(j\omega)$是存在的。</p>
+
+  <p>根据拉普拉斯变换的相关性质，可以得到结论：<strong>系统稳定的充要条件是系统的极点的实部小于零（即位于左半平面）</strong>。</p>
+
+  <p>推导过程简化如下：</p>
+
+\[x(t)*h(t)有限 \rightarrow h(t)绝对可积 \rightarrow H(j\omega)=F\{h(t)\}存在 \rightarrow H(s)=L\{h(t)\}存在 \rightarrow 虚轴j\omega在L\{h(t)\}收敛域内\]
+
+\[因果系统 \rightarrow h(t)是右边信号 \rightarrow 若\sigma在收敛域内，则满足Re\{s\}\geq Re\{\sigma\}的s都在收敛域内 \rightarrow 收敛域在最右极点的右边（收敛域中没有极点）\]
+
+  <p>结合上两个结论，既要虚轴在收敛域内，又要收敛域在最右极点的右边，只能要求极点的实部小于零。</p>
+</blockquote>
+
+<p>考虑最简单的情况，有负反馈系统如下图所示（其中$H(s)=num(s)/den(s)$）：</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Diagram_Sample_Negative_Feedback.png" alt="Diagram_Sample_Negative_Feedback" /></p>
+
+<p>易得其闭环传递函数为$G(s)=H(s)/(1+H(s))=num(s)/(num(s)+den(s))$，显然有</p>
+
+<ul>
+  <li>闭环传函的零点与开环传函的相同；</li>
+  <li>闭环传函的极点由$num(s)+den(s)$即$1+H(s)$决定。</li>
+</ul>
+
+<p>现在的问题就转化为，<strong>如何根据$H(s)$判断$1+H(s)$是否有在右半平面的根。</strong></p>
+
+<p>如果能写出$H(s)$的解析式，求解$1+H(s)=0$并不是什么难事。如果不能写出其解析式，该如何判断呢？</p>
+
+<h2 id="巴克豪森判据">巴克豪森判据</h2>
+
+<p>巴克豪森判据（Barkhausen Stability Criterion）提供了一种简单的办法来判断系统的稳定性，它的出发点是<em>假设有一个正弦激励信号在环路里走了一圈，如果回来的信号是同相的，且幅度没有变小，无论这个激励信号的频率如何，这个系统都是不稳定的</em>。这种想法很直观，并且很容易利用波特图（Bode Plot）进行判断，是在线电等课程中最常见到的稳定性判据。</p>
+
+<p>即对于前面提到的负反馈而言，$\angle H(s)=180^\circ$表示激励信号转一圈后是同相的，$\vert H(s)\vert  \geq 1$表示回来的信号幅度相同或变大。</p>
+
+<p>波特图描述的是当$s=j\omega$时，$\vert H(s)\vert $和$\angle H(s)$随$\omega$的变化情况，其中$\vert H(s)\vert $以dB为单位。对于特定的$\omega$，对应的$\vert H(j\omega)\vert $和$\angle H(j\omega)$即表示角频率为$\omega$的激励信号经过该系统传递后获得的增益和相移。因此可以在幅频曲线（$\vert H(j\omega)\vert -\omega$）和相频曲线（$\angle H(j\omega)-\omega$）上标出0dB和180$^\circ$的位置，借此判断由其构成的闭环系统是否稳定，以及裕量如何。</p>
+
+<p>如下图所示，这个闭环系统是稳定的，并且其相位裕度（Phase Margin）是47$^\circ$，增益裕度（Gain Margin）是11.6dB。</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Bode_OPAMP.png" alt="Bode_OPAMP" /></p>
+
+<p>由于过冲（Overshooting）的大小与相位裕度有关（参考：<a href="http://www2.units.it/carrato/didatt/E_web/doc/application_notes/overshoot_and_phase_margin.pdf">Overshoot as a Function of Phase Margin</a>），因此在实际应用中我们更多的用波特图观察相位裕度及其走向，而不太关注增益裕度。</p>
+
+<p>如果出现了负的增益裕度，系统一定会像前面所述的那样出现不稳定的现象吗？给上面那个波特图在200kHz处加3个极点、在1MHz处加3个零点，会得到下面的图像（调整了增益项使单位增益频率不变）：</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Bode_OPAMP_2.png" alt="Bode_OPAMP_2" /></p>
+
+<p>在上图中有3个增益裕度，其中两负一正（-63.3dB、-25.2dB和+10.2dB）。而基于这个开环传函构建的闭环系统是稳定的，因为它的极点均在左半平面：</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">pole</span><span class="p">(</span><span class="n">feedback</span><span class="p">(</span><span class="n">H_ol_tf</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">ans</span> <span class="o">=</span>
+
+   <span class="mf">1.0e+08</span> <span class="o">*</span>
+
+  <span class="o">-</span><span class="mf">6.0843</span> <span class="o">+</span> <span class="mf">0.0000</span><span class="n">i</span>
+  <span class="o">-</span><span class="mf">3.8408</span> <span class="o">+</span> <span class="mf">0.0000</span><span class="n">i</span>
+  <span class="o">-</span><span class="mf">0.2917</span> <span class="o">+</span> <span class="mf">0.7180</span><span class="n">i</span>
+  <span class="o">-</span><span class="mf">0.2917</span> <span class="o">-</span> <span class="mf">0.7180</span><span class="n">i</span>
+  <span class="o">-</span><span class="mf">0.1148</span> <span class="o">+</span> <span class="mf">0.0000</span><span class="n">i</span>
+  <span class="o">-</span><span class="mf">0.0510</span> <span class="o">+</span> <span class="mf">0.0103</span><span class="n">i</span>
+  <span class="o">-</span><span class="mf">0.0510</span> <span class="o">-</span> <span class="mf">0.0103</span><span class="n">i</span>
+</code></pre></div></div>
+
+<p>检视闭环系统的阶跃响应也可以证明这点：</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Step_OPAMP_2.png" alt="Step_OPAMP_2" /></p>
+
+<p>这个例子说明巴克豪森判据对于这种问题是不完备的，它只能用于相频曲线只穿过一次180$^\circ$线的情况。更多的可以参考<a href="http://web.mit.edu/klund/www/weblatex/node4.html">Barkhausen Stability Criterion</a>。</p>
+
+<h2 id="根轨迹法">根轨迹法</h2>
+
+<p>根轨迹（Root Locus）法是根据开环传函的零极点分布，通过改变其某个参数（一般是增益）来观察闭环极点在复平面上位置的变化情况，进而判断闭环系统稳定条件的方法。</p>
+
+<p>根轨迹的绘制非常复杂和繁琐，具体的可以参考<a href="https://zhuanlan.zhihu.com/p/28993380">要想正确画出根轨迹，先搞清楚这8大法则再说！</a>。不过借助MATLAB可以很轻松的获得上面那个传函的根轨迹图，如下所示（右侧的为局部放大图）：</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/RLocus_OPAMP_2.png" alt="RLocus_OPAMP_2" /></p>
+
+<p>从根轨迹图上可以看到闭环传函的极点有两部分到了右半平面，分别是</p>
+
+<ul>
+  <li>当增益约大于3.42时（精确值是3.2359）；</li>
+  <li>当增益约在0.000589～0.0579之间时（精确值是0.000684～0.0550）。</li>
+</ul>
+
+<p>这正对应了前面的增益裕度（+10.2dB、-63.3dB和-25.2dB）。</p>
+
+<p>也就是说，增益裕度的含义是如果环路的额外增益出现这样的变化的话，系统会进入不稳定状态。<strong>正的裕度表示环路的增益变大会导致不稳定，负的则表示增益变小会导致不稳定。</strong>而至于为何环路增益在环路相移为180$^\circ$时大于1却不会产生自激振荡，我还没有找到合理、直观的答案，可参考：</p>
+
+<ul>
+  <li><a href="https://www.edaboard.com/showthread.php?361029-Loop-Gain-greater-than-0db-and-phase-shift-180-degree&amp;p=1546334&amp;viewfull=1#post1546334">Re: Loop Gain greater than 0db and phase shift 180 degree</a></li>
+  <li><a href="https://www.researchgate.net/post/What_is_the_intuitive_explanation_for_stability_of_a_specific_feedback_system2">What is the intuitive explanation for stability of a specific feedback system ?</a></li>
+  <li><a href="https://www.quora.com/Can-a-control-system-be-stable-with-negative-gain-margin-and-positive-phase-margin">Can a control system be stable with negative gain margin and positive phase margin</a></li>
+</ul>
+
+<p>根轨迹法在实际应用中的问题在于需要知道传递函数的解析式，而如果知道了解析式便可以直接求解$1+H(s)=0$，因此我们还是希望直接利用$H(s)$的响应曲线进行判断，因为它是可以通过实验法获得的。</p>
+
+<h2 id="奈奎斯特判据">奈奎斯特判据</h2>
+
+<p>奈奎斯特判据（Nyquist Stability Criterion）利用了柯西副角定理（Cauchy’s argument principle），其简单的表述如下：</p>
+
+<blockquote>
+  <ul>
+    <li>若在$s$平面用闭合曲线顺时针包围$H(s)$的零点，则在$H(s)$平面原点会被顺时针包围；</li>
+    <li>若在$s$平面用闭合曲线顺时针包围$H(s)$的极点，则在$H(s)$平面原点会被逆时针包围；</li>
+    <li>若在$s$平面用闭合曲线不包围$H(s)$的零点或极点，则在$H(s)$平面原点不会被闭合曲线包围；</li>
+    <li>若在$s$平面用闭合曲线顺时针包围$H(s)$的多个零点和极点，则在$H(s)$平面原点会被顺时针包围$N=Z-P$圈，其中$Z$为闭合曲线中零点的个数，$P$为闭合曲线中极点的个数，若$N$为负值则表示原点被逆时针包围；</li>
+  </ul>
+</blockquote>
+
+<p>基于副角定理可以推断，如果在$s$平面沿着虚轴从$-\infty$到$+\infty$、再沿着一个半径为无穷大的半圆回到$-\infty$，将覆盖$H(s)$所有在右半平面的零极点，那么数一数$H(s)$平面中原点被绕了几圈就可以推断右半平面零极点的个数。同样的道理，数一数点(-1, 0)被绕了几圈就可以推断$1+H(s)$右半平面零极点的个数，如下图所示（参考自<a href="https://wenku.baidu.com/view/c4a2fa60cf84b9d528ea7ae0.html">奈奎斯特稳定判据</a>）：</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_principle.png" alt="Nyquist_principle" /></p>
+
+<blockquote>
+  <p>注意这里有个前提条件是原点和虚轴上没有零极点。</p>
+</blockquote>
+
+<p>如果开环传函没有右半平面零极点（即$P=0, Z=0$），那么闭环系统稳定的充要条件是<strong>曲线不包围点(-1, 0)</strong>。</p>
+
+<p>对于开环传函有原点处极点的情况（例如PLL的传函），则需要补全曲线，其规则是用一个半径为无穷大的圆弧从正半实轴连接到$\omega=0^+$的点，圆弧的角度为$-n\cdot\pi/2$，其中$n$为开环传函中位于原点的极点个数。下图所示的为$n$分别取1、2、3的情况（从波特图上理解，可以认为在最最左侧相位从0<strong>连续</strong>变到$-n\cdot\pi/2$，即在相频曲线上画了一条竖线）：</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_principle_2.png" alt="Nyquist_principle_2" /></p>
+
+<p>因为$H(a-jb)$与$H(a+jb)$的实部相同、虚部互为相反数（即关于实轴对称），实际应用中只需要知道$\omega=0^+\rightarrow+\infty$的情况即可。具体的可以参考：</p>
+
+<ul>
+  <li><a href="https://www.researchgate.net/post/How_can_I_define_stability_of_system_if_we_have_negative_GM_and_positive_PM">How can I define stability of system if we have negative GM and positive PM ?</a></li>
+  <li><a href="https://www.researchgate.net/profile/Itzhak_Barkana2/post/How_can_I_define_stability_of_system_if_we_have_negative_GM_and_positive_PM/attachment/59d75789d44f3d7818de7171/AS%3A546043126792192%401507198234829/download/20171005+NyquistBodeNichols.docx">20171005 NyquistBodeNichols.docx –by Itzhak Barkana</a></li>
+  <li><a href="https://wenku.baidu.com/view/c4a2fa60cf84b9d528ea7ae0.html">奈奎斯特稳定判据</a></li>
+</ul>
+
+<p><strong>例1</strong>：把前面那个系统的$H(s)$在$s=j\omega, \omega=0\rightarrow+\infty$的值在复平面上画出，并对其做关于实轴的镜像，即得到了奈奎斯特图。在查看奈奎斯特图时需要不同级别的缩放，以观察曲线和点(-1, 0)的关系，如下图所示：</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_OPAMP_2.png" alt="Nyquist_OPAMP_2" /></p>
+
+<p>由于原始奈奎斯特图不方便查看，此处引入一个缩放函数</p>
+
+\[\begin{equation}
+f(x)=\left\{
+\begin{aligned}
+sign(x)\cdot( \frac{1}{ln10}\cdot \vert x\vert ^3-(1+\frac{1}{ln10})\cdot \vert x\vert ^2+2\cdot \vert x\vert ), \vert x\vert &lt;1 \\
+sign(x)\cdot(log_{10}\vert x\vert ), \vert x\vert \geq1
+\end{aligned}
+\right.
+\end{equation}\]
+
+<p>该缩放函数可以在尽量避免影响$-1&lt;x&lt;1$的前提下大大减小不同数量级之间的差别。在释加缩放函数后奈奎斯特曲线如下图所示（需要注意两条线实际上是连接在一起的，下同）。从这张图中便很容易观察出(-1, 0)没有被闭合曲线围绕（可以把曲线想象成柔软的绳子，而(-1, 0)是一根柱子，拉住最右侧部分的绳子向右拉动，可以发现绳子不会被柱子挡住），因此系统是稳定的。至于裕量，需要通过曲线与单位圆的交点进行判断，此处不再赘述。</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_OPAMP_2_log.png" alt="Nyquist_OPAMP_2_log" /></p>
+
+<p>若将增益增大5倍，这条曲线会变成如下的样子，不难看出点(-1, 0)被沿逆时针方向围绕了两圈，即闭环传函在右半平面存在两个极点，系统不稳定。</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_OPAMP_2_log2.png" alt="Nyquist_OPAMP_2_log2" /></p>
+
+<p><strong>例2</strong>：考虑最前面带温度补偿的PLL，按照前面的规则绘制奈奎斯特图如下，同样可以看出点(-1, 0)没有被闭合曲线围绕，因此闭环系统是稳定的。</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nyquist_PLL_wTempCal_log.png" alt="Nyquist_PLL_wTempCal_log" /></p>
+
+<h2 id="尼科尔斯图">尼科尔斯图</h2>
+
+<p>前面提到的波特图和奈奎斯特图是以两种不同的方式展示$H(j\omega)$，分别是$\vert H(j \omega)\vert -\omega、\angle H(j \omega)-\omega$和$image(H(s))-real(H(s))$，而尼科尔斯图（Nichols Plot）是另外一种展示方式，它是$\vert H(j\omega)\vert -\angle H(j\omega)$曲线，如下图所示。</p>
+
+<p><img src="/img/in-post/2019-06-08-Why_Gain_Margin_Can_be_Negative.assets/Nichols_OPAMP_2.png" alt="Nichols_OPAMP_2" /></p>
+
+<p>波特图上的两条虚线就变成了尼科尔斯图上的一个点，一般情况下若点(-180$^\circ$, 0dB)在曲线的右侧（沿着$\omega$从小到大的方向看），则表示闭环系统稳定。而与波特图类似的，若相位多次穿过180$^\circ$，这种判据也会存在问题。</p>
+
+<h1 id="总结">总结</h1>
+
+<p>本文的目的是探究负的增益裕量的含义和汇总常用的稳定性判据：</p>
+
+<ul>
+  <li>增益裕量为负时闭环系统也可以是稳定的，只是说明若环路增益减小系统会进入不稳定状态，但如何直观的理解这一现象我还没找到答案；</li>
+  <li>除了常见的巴克豪森判据，还有解析法、根轨迹法、奈奎斯特判据等方法可以稳妥的判断闭环系统是否稳定。</li>
+</ul>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/01/09/Pretty_Cadence_Libmanager/" data-toggle="tooltip" data-placement="top" title="美化Cadence Library Manager">
+                        Previous<br>
+                        <span>美化Cadence Library Manager</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/10/05/Brief_of_Digital_Filter/" data-toggle="tooltip" data-placement="top" title="数字滤波器的简单使用">
+                        Next<br>
+                        <span>数字滤波器的简单使用</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#MATLAB" title="MATLAB" rel="4">
+                                    MATLAB
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PLL" title="PLL" rel="11">
+                                    PLL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Programing" title="Programing" rel="4">
+                                    Programing
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Math" title="Math" rel="2">
+                                    Math
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Others" title="Others" rel="2">
+                                    Others
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Flask" title="Flask" rel="2">
+                                    Flask
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Training" title="Training" rel="2">
+                                    Training
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SerDes" title="SerDes" rel="2">
+                                    SerDes
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="#">(none)</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<!--
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+-->
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; MaZhaoxin's Blog 2024
+                    <br>
+					Powered by <a href="https://jekyllrb.com/" style="font-weight: bold">Jekyll</a> |
+					Themed by <a href="http://huangxuan.me" style="font-weight: bold">Hux</a> |
+					Hosted by <a href="https://pages.github.com/" style="font-weight: bold">GitHub Pages</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<!-- <script src="/js/jquery.min.js "></script> -->
+<script src="//cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- <script src="/js/bootstrap.min.js "></script> -->
+<script src="//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Jekyll Search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="Title / Date / Tags" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+</body>
+
+</html>

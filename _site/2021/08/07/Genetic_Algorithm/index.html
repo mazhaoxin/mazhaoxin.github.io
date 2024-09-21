@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="v0uNv3nx9jZLk-UxF0kPiGyotJ8tb-5YkP8IuUyUYsE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="这里是马昭鑫的博客，用来记录平时一些乱七八糟的想法和总结。Keep thinking, keep moving.
+">
+    <meta name="keywords"  content="马昭鑫, MaZhaoxin
+">
+    <meta name="theme-color" content="#000000">
+    
+    <title>遗传算法 - 马昭鑫的博客 | MaZhaoxin's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2021/08/07/Genetic_Algorithm/">
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+	<!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {
+	      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	      processEscapes: true
+	    }
+	  });
+	</script>
+  	<!-- <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+	<script src="//cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">MaZhaoxin's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+					<li>
+						<a href="#" id="cb-search-btn">SEARCH</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/bg-post/coding.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Others" title="Others">Others</a>
+                        
+                    </div>
+                    <h1>遗传算法</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by MaZhaoxin on August 7, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="基本原理">基本原理</h1>
+
+<p>遗传算法（Genetic Algorithm，GA）的目的是解决最优化问题，基本原理则是模仿生物<em>自然选择或进化</em>的过程。</p>
+
+<p>具体的，它把问题的解分成若干个<strong>基因</strong>，这些基因合为一个<strong>个体</strong>（也就是每个个体是一个潜在的解，每个基因是一个独立变量）。若干个体组成<strong>种群</strong>，通过一定的方式给种群中的每个个体<strong>打分</strong>（计算<em>适应度</em>），其中得分较高的部分个体（<em>选择</em>）可以<strong>繁殖</strong>产生后代。繁殖的过程包括<strong>杂交</strong>和<strong>变异</strong>，杂交表示新产生的个体的基因继承自两个长辈个体，变异表示基因会在原来的基础上产生一定的、随机的变化。选择和繁殖的过程会不断地改变群体里个体的基因，使其代表的解逐渐地向最优解靠近。</p>
+
+<p><img src="/img/in-post/2021-08-07-Genetic_Algorithm.assets/basic.svg" alt="basic" /></p>
+
+<h1 id="举个例子">举个例子</h1>
+
+<p>通过遗传算法模拟生物外貌进化的过程。假设这种生物的外观也是RGB色彩空间的，我们通过选择与下图最相似的个体进行繁殖，看它们的演化过程是怎样的。</p>
+
+<blockquote>
+  <p>该图案是中央气象台nmc.cn的logo。</p>
+</blockquote>
+
+<p><img src="/img/in-post/2021-08-07-Genetic_Algorithm.assets/ref.png" alt="ref" /></p>
+
+<p>首先定义几个常数</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 每次选择出来的个体数
+</span><span class="n">N_UNIT_TOP</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># 筛选代数（迭代次数）
+</span><span class="n">N_LOOP</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># 杂交时的交叉率：有多少比例的基因来自对方个体
+</span><span class="n">RATE_CROSS</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="c1"># 变异率
+</span><span class="n">RATE_CHANGE</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="c1"># 变异时的标准差
+</span><span class="n">RATE_CHANGE_STD</span> <span class="o">=</span> <span class="mf">0.05</span>
+</code></pre></div></div>
+
+<p>然后进行一些准备工作，包括读取参考图案、确定基因个数和种群大小、初始化记分牌之类的。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 读取参考图案，确定基因个数和种群大小
+</span><span class="n">pic_ref</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">FNAME_REF</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s">'png'</span><span class="p">)</span>
+<span class="n">N_W</span><span class="p">,</span> <span class="n">N_H</span><span class="p">,</span> <span class="n">N_C</span> <span class="o">=</span> <span class="n">pic_ref</span><span class="p">.</span><span class="n">shape</span>
+<span class="n">N_GENE</span> <span class="o">=</span> <span class="n">N_W</span><span class="o">*</span><span class="n">N_H</span><span class="o">*</span><span class="mi">3</span>
+<span class="n">N_UNIT</span> <span class="o">=</span> <span class="n">N_UNIT_TOP</span><span class="o">**</span><span class="mi">2</span>
+<span class="c1"># 记分牌
+</span><span class="n">score_rcd</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">unit_rcd</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">unit_ref</span> <span class="o">=</span> <span class="n">pic_ref</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_GENE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>接下来就是重头戏了，为了方便起见先把计算适应度和产生后代的过程写成函数。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 计算适应度
+</span><span class="k">def</span> <span class="nf">get_score</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">unit_ref</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">((</span><span class="n">unit</span><span class="o">-</span><span class="n">unit_ref</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># 产生后代
+</span><span class="k">def</span> <span class="nf">gen_child</span><span class="p">(</span><span class="n">unit_x</span><span class="p">,</span> <span class="n">unit_y</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N_GENE</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">RATE_CROSS</span><span class="o">*</span><span class="n">N_GENE</span><span class="p">))</span>
+    <span class="n">idx2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N_GENE</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">RATE_CHANGE</span><span class="o">*</span><span class="n">N_GENE</span><span class="p">))</span>
+    <span class="n">change</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N_GENE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">RATE_CHANGE_STD</span>
+    <span class="n">unit_new</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">unit_x</span><span class="p">)</span>
+    <span class="n">unit_new</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit_y</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">unit_new</span><span class="p">[</span><span class="n">idx2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">change</span><span class="p">[</span><span class="n">idx2</span><span class="p">]</span>
+    <span class="n">unit_new</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">clip</span><span class="p">(</span><span class="n">unit_new</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">unit_new</span>
+</code></pre></div></div>
+
+<p>遗传算法的主要部分是一个循环，每次循环做一次<strong>繁殖-适应-选择</strong>的迭代。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i_loop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_LOOP</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'i = </span><span class="si">{</span><span class="n">i_loop</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s"> / </span><span class="si">{</span><span class="n">N_LOOP</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+    <span class="c1"># 繁殖
+</span>    <span class="k">if</span> <span class="n">i_loop</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># 初始化种群：通过随机
+</span>        <span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">random</span><span class="p">([</span><span class="n">N_GENE</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_UNIT</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 杂交与变异：每两个不同的个体分别以自身为主、对方为辅进行杂交
+</span>        <span class="k">for</span> <span class="n">i_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_UNIT_TOP</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_UNIT_TOP</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i_x</span><span class="o">==</span><span class="n">i_y</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">group</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">gen_child</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="n">i_x</span><span class="p">],</span> <span class="n">group</span><span class="p">[</span><span class="n">i_y</span><span class="p">]))</span>
+
+    <span class="c1"># 打分（计算适应度）
+</span>    <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_score</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">unit_ref</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">group</span><span class="p">]</span>
+    
+    <span class="c1"># 选择，并记录下本轮中最佳的个体和得分
+</span>    <span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_UNIT</span><span class="p">)))]</span>
+    <span class="n">score_rcd</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">unit_rcd</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">group</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_UNIT_TOP</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<p>展示一下最终的结果：下图中左上角的为参考图案，其他的从左到右、从上到下是从初始一代到最后一代（相邻的两张图间隔了100代）各代中最佳的个体（即分最高的个体）。可以看到从完全没有图案到出现图案，再到图案逐渐清晰的过程。</p>
+
+<p><img src="/img/in-post/2021-08-07-Genetic_Algorithm.assets/plot_1000.png" alt="plot_1000" /></p>
+
+<p>对应的各代最佳个体的分数变化如下图所示，可见600代后适应度分数的变化趋于平缓了，也对应了上图中图案清晰度的变化没那么大。</p>
+
+<p><img src="/img/in-post/2021-08-07-Genetic_Algorithm.assets/score_1000.png" alt="score_1000" /></p>
+
+<p>参考图案的尺寸是<code class="language-plaintext highlighter-rouge">35x35</code>像素，即基因的个数是3675个。在种群中个体的数量是100个、共迭代了1000代的情况下，耗时和各部分的比例如下。需要注意这个例子中计算适应度的函数非常简单，也就是说一般情况下产生新个体并不麻烦，评价个体的情况是花费时间最多的地方。</p>
+
+<blockquote>
+  <p>Generate: 74.49s (31.90%)</p>
+
+  <p>Score: 158.36s (67.82%)</p>
+
+  <p>Select: 0.64s (0.27%)</p>
+</blockquote>
+
+<h1 id="具体应用">具体应用</h1>
+
+<p>具体到实现，第一步则是要把实际问题转化为可以用遗传算法求解的模型，这个模型有两个重要的组成部分：独立变量和评价方法。</p>
+
+<p>如前面所说的，问题的解对应了算法中的“个体”，而其最小组成部分“基因“则对应了独立变量。实际问题里有些参数可能存在着关联，变量过多会导致求解困难，因此需要尽量提取其相互独立的部分。变量的取值可以是小数，也可以是整数，甚至是<code class="language-plaintext highlighter-rouge">True</code>/<code class="language-plaintext highlighter-rouge">False</code>。通过确定独立变量，便把解空间确定了下来。</p>
+
+<p>求解过程实际上是一种搜索过程，要有一个能够判断解是否够好的量化方法，通过这个方法才能实现“选择”过程。</p>
+
+<blockquote>
+  <p>emmm……我本打算尝试用遗传算法去根据频率响应产生FIR滤波器参数，可是调了好久都没达到预期的效果，看来我还需要再学习一下。</p>
+</blockquote>
+
+<h1 id="一些思考">一些思考</h1>
+
+<p>之所以看遗传算法，一方面是因为在网上看到类似枯叶蝶之类的动物（以及更多的<a href="https://www.sohu.com/a/145335883_737109">自然界伪装高手 - 搜狐</a>）时，总会有人说这么完美怎么可能是进化来的，一定是有“神”来设计。当然更多的人对这种观点是嗤之以鼻的，我就想可以借用遗传算法说明一下<code class="language-plaintext highlighter-rouge">进化=随机突变+自然选择</code>。</p>
+
+<p><img src="/img/in-post/2021-08-07-Genetic_Algorithm.assets/butterfly.gif" alt="枯叶蝶" /></p>
+
+<p>另一方面是因为近几年人工智能大火，点开<a href="https://ieeexplore.ieee.org/popular/all">IEEE TOP SERACHES</a>就会看到有近一半关键词与人工智能或者机器学习相关；常逛的EETOP也被站长把“AI”设置成了关键词，普通单词里挨着的俩字母也经常会被误认而改成大写划上下划线，搞得莫名其妙。我想应该稍微去涉猎一下，免得被时代落下太多。而人工智能的三大模型（专家系统、遗传算法、神经网络，好像也有其他的说法）中遗传算法最为简洁、直接，便从这下了手。</p>
+
+<blockquote>
+  <p>以我个人目前浅显的调研来看，会影响到模拟集成电路设计领域的应该是专家系统模型，这也是最需要积累和普通电路设计者参与的模型，神经网络最多能在“小问题”和“模糊问题”上做一些加强。</p>
+
+  <p>神经网络的优势应该在于解“模糊问题”，如应对语音、手写文字、图像等等。这类问题的特点是很难用<strong>明确</strong>的方法得到解，而神经网络通过大量的参数和漫长的自动调参（训练）得到一组参数，使其能<strong>大概率</strong>地实现想要达到的目的。这种<strong>通用</strong>的方法看起来非常amazing，近几年飞速增长的算力也有了用武之地，但它的问题在于模型的训练要依赖大量的试错。在模拟集成电路设计中，有很多仿真需要较长的时间去覆盖所有的corner，诚然我们可以给出<em>经验上的</em>worst case来缩短这个过程，但可能也不是训练过程能接受的。</p>
+
+  <p>我想最可能的方法是把常用的电路结构量化分析透彻（比如经常被拿来举例的运算放大器和LDO），每个管子的功能和参数对整体的影响都写入“知识库”，这样当给出所需的规格时，计算机就可以根据“知识库”的信息自动找到最佳设计方案，甚至直接给出GDS。当换到一个未知的新工艺时，也只需要补充“知识库”的内容即可。打个比方，理论上DC和瞬态仿真是最精准的，用瞬态仿真也可以确定放大器的增益、噪声、稳定性等等，那为什么还需要小信号模型、反馈理论呢，还不是因为这样快嘛！因此我的观点是，模拟集成电路设计自动化的关键在于——<strong>抽象</strong>。要把实际工程中会用到的电路模块按类别抽象成模型，翻译成计算机能理解的“知识”。但这样相当于把训练神经网络变成了训练工程师，至少人的归纳、总结、演绎能力目前还是有优势……的吧？</p>
+</blockquote>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/08/01/Reliability_and_ESD_Introduction/" data-toggle="tooltip" data-placement="top" title="可靠性与ESD介绍">
+                        Previous<br>
+                        <span>可靠性与ESD介绍</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/01/23/Phase_Noise_Jitter_EVM_and_Eye_Diagram/" data-toggle="tooltip" data-placement="top" title="相位噪声、抖动、EVM与眼图">
+                        Next<br>
+                        <span>相位噪声、抖动、EVM与眼图</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#MATLAB" title="MATLAB" rel="4">
+                                    MATLAB
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#PLL" title="PLL" rel="11">
+                                    PLL
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Programing" title="Programing" rel="4">
+                                    Programing
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Math" title="Math" rel="2">
+                                    Math
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Others" title="Others" rel="2">
+                                    Others
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Flask" title="Flask" rel="2">
+                                    Flask
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Training" title="Training" rel="2">
+                                    Training
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#SerDes" title="SerDes" rel="2">
+                                    SerDes
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ChatGPT" title="ChatGPT" rel="2">
+                                    ChatGPT
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="#">(none)</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<!--
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+-->
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://weibo.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/(none)">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/%E6%98%AD%E9%91%AB-%E9%A9%AC-96023bb7">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; MaZhaoxin's Blog 2024
+                    <br>
+					Powered by <a href="https://jekyllrb.com/" style="font-weight: bold">Jekyll</a> |
+					Themed by <a href="http://huangxuan.me" style="font-weight: bold">Hux</a> |
+					Hosted by <a href="https://pages.github.com/" style="font-weight: bold">GitHub Pages</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<!-- <script src="/js/jquery.min.js "></script> -->
+<script src="//cdn.staticfile.org/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- <script src="/js/bootstrap.min.js "></script> -->
+<script src="//cdn.staticfile.org/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Jekyll Search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="Title / Date / Tags" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+</body>
+
+</html>
