@@ -1,4 +1,5 @@
 _site
-.sass-cache
+.jekyll-cache
 .jekyll-metadata
+.sass-cache
 _posts/2018-08-08-模板.md
